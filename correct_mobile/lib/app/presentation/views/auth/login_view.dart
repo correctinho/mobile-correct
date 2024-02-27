@@ -5,6 +5,7 @@ import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/auth_controller.dart';
 import 'package:mobile_create/app/presentation/utils/snack_bar.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
+import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/token/token_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
@@ -159,42 +160,42 @@ class _LoginViewState extends State<LoginView> {
                         if (!authController.loading) {
                           return InkWell(
                             onTap: () async {
-                              //   await authController.login();
-                              //   if (authController.response == 'logedin') {
-                              //     if (mounted && authController.isFirst) {
-                              //       if (authController.isFirst) {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const DetailsCheckView(),
-                              //   ),
-                              //         );
-                              //       } else {
-                              //         Navigator.of(context).push(
-                              //           MaterialPageRoute(
-                              //             builder: (context) =>
-                              //                 const HomeNavigationView(),
-                              //           ),
-                              //         );
-                              //         showSnackBar(context, 'Bem vindo!');
-                              //       }
-                              //     }
-                              //   } else {
-                              //     if (mounted) {
-                              //       showSnackBar(
-                              //           context, authController.response);
-                              //     }
-                              //   }
+                                await authController.login();
+                                if (authController.response == 'logedin') {
+                                  if (mounted && authController.isFirst) {
+                                    if (authController.isFirst) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       const DetailsCheckView(),
                                 ),
-                              );
+                                      );
+                                    } else {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomeNavigationView(),
+                                        ),
+                                      );
+                                      showSnackBar(context, 'Bem vindo!');
+                                    }
+                                  }
+                                } else {
+                                  if (mounted) {
+                                    showSnackBar(
+                                        context, authController.response);
+                                  }
+                                }
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         const DetailsCheckView(),
+                              //   ),
+                              // );
                             },
                             child: const MainButton(
                               color: CustomColors.white,
-                              text: 'Sign in',
+                              text: 'Login',
                               height: 50,
                               textColor: Color(0xFF012B42),
                             ),

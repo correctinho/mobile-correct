@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
+import 'package:mobile_create/app/domain/entities/adress_entity.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 
 class LegislationView extends StatefulWidget {
@@ -14,17 +15,8 @@ class _LegislationViewState extends State<LegislationView> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    List<String> legislationList = [
-      'Culture',
-      'Economy',
-      'Human Rights',
-      'Health',
-      'Enviroment',
-      'Government',
-      'Security',
-      'Education',
-      'Mobility',
-      'COVID-10'
+    List<AddressEntity> legislationList = [
+     
     ];
 
     return Scaffold(
@@ -91,39 +83,55 @@ class _LegislationViewState extends State<LegislationView> {
         color: CustomColors.backGroundColor,
         height: size.height,
         width: size.width,
-        child: GridView.builder(
-          padding: const EdgeInsets.all(20),
-          itemCount: 10,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 30,
-              crossAxisSpacing: 15,
-              childAspectRatio: 1 / 0.5),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                height: 50,
-                decoration: ShapeDecoration(
-                  color: CustomColors.ligthGrey,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/legislation/${index + 1}.png'),
-                    Text(' ${legislationList[index]}')
-                  ],
-                ),
+        child: ListView.separated(
+          shrinkWrap: true,
+          separatorBuilder: (context, index) => Divider(),
+          itemCount: 3,
+          itemBuilder: (context, index) => Row(
+            children: [
+              Icon(Icons.pedal_bike),
+              Column(
+                children: [
+                  Text(legislationList[index].street),
+                  Text(legislationList[index].state),
+                ],
+                
               ),
-            );
-          },
-        ),
+              Text(legislationList[index].number!)
+            ],
+          )        // GridView.builder(
+        //   padding: const EdgeInsets.all(20),
+        //   itemCount: 10,
+        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //       crossAxisCount: 2,
+        //       mainAxisSpacing: 30,
+        //       crossAxisSpacing: 15,
+        //       childAspectRatio: 1 / 0.5),
+        //   itemBuilder: (context, index) {
+        //     return InkWell(
+        //       onTap: () {},
+        //       child: Container(
+        //         padding: const EdgeInsets.all(12),
+        //         height: 50,
+        //         decoration: ShapeDecoration(
+        //           color: CustomColors.ligthGrey,
+        //           shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(15),
+        //           ),
+        //         ),
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.start,
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           children: [
+        //             Image.asset('assets/legislation/${index + 1}.png'),
+        //             Text(' ${legislationList[index]}')
+        //           ],
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // ),
       ),
-    );
+    ));
   }
 }

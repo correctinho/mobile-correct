@@ -9,38 +9,6 @@ part of 'register_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterController on _RegisterControllerBase, Store {
-  late final _$cpfAtom =
-      Atom(name: '_RegisterControllerBase.cpf', context: context);
-
-  @override
-  String get cpf {
-    _$cpfAtom.reportRead();
-    return super.cpf;
-  }
-
-  @override
-  set cpf(String value) {
-    _$cpfAtom.reportWrite(value, super.cpf, () {
-      super.cpf = value;
-    });
-  }
-
-  late final _$emailAtom =
-      Atom(name: '_RegisterControllerBase.email', context: context);
-
-  @override
-  String get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
   late final _$passwordAtom =
       Atom(name: '_RegisterControllerBase.password', context: context);
 
@@ -121,6 +89,22 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
+  late final _$ordinaryUserEntityAtom = Atom(
+      name: '_RegisterControllerBase.ordinaryUserEntity', context: context);
+
+  @override
+  OrdinaryUserEntity get ordinaryUserEntity {
+    _$ordinaryUserEntityAtom.reportRead();
+    return super.ordinaryUserEntity;
+  }
+
+  @override
+  set ordinaryUserEntity(OrdinaryUserEntity value) {
+    _$ordinaryUserEntityAtom.reportWrite(value, super.ordinaryUserEntity, () {
+      super.ordinaryUserEntity = value;
+    });
+  }
+
   late final _$registerAsyncAction =
       AsyncAction('_RegisterControllerBase.register', context: context);
 
@@ -132,13 +116,12 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
   @override
   String toString() {
     return '''
-cpf: ${cpf},
-email: ${email},
 password: ${password},
 confirmPass: ${confirmPass},
 response: ${response},
 canRegister: ${canRegister},
-loading: ${loading}
+loading: ${loading},
+ordinaryUserEntity: ${ordinaryUserEntity}
     ''';
   }
 }

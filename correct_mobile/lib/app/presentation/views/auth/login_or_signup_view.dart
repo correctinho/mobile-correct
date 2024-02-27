@@ -56,7 +56,7 @@ class _LoginOrSignUpState extends State<LoginOrSignUp> {
                     ),
                     child: const Center(
                       child: Text(
-                        'Sing in',
+                        'Login',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -82,7 +82,7 @@ class _LoginOrSignUpState extends State<LoginOrSignUp> {
                     ),
                     child: const Center(
                       child: Text(
-                        'Sign Up',
+                        'Cadastro',
                         style: TextStyle(
                           color: Color(0xFF012B42),
                           fontSize: 18,
@@ -101,11 +101,12 @@ class _LoginOrSignUpState extends State<LoginOrSignUp> {
           left: 40,
           child: SizedBox(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 LogoWidget(height: 200, width: 200),
                 Text(
-                  'Your purchases generate cashback',
+                  'Suas compras geram cashback',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,

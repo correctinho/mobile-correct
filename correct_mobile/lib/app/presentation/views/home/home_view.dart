@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobile_create/app/presentation/views/categories/categories_view.dart';
+import 'package:mobile_create/app/core/colors/colors.dart';
+import 'package:mobile_create/app/presentation/views/home/help_view.dart';
+import 'package:mobile_create/app/presentation/views/home/indicate_business_view.dart';
+import 'package:mobile_create/app/presentation/views/home/showcase_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -16,10 +19,10 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme:  const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         toolbarHeight: 80,
         title: Container(
-          child: Image.asset('assets/home/logo_home.png'),
+          child: Image.asset('assets/logo_correct_nome.png'),
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -32,7 +35,85 @@ class _HomeViewState extends State<HomeView> {
           )
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: ListView(children: [
+          DrawerHeader(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[
+                      CustomColors.grey,
+                      CustomColors.white,
+                    ]),
+              ),
+              child: ListView(
+                children: [
+                  ListTile(
+                    onTap: () {},
+                    leading: Image.asset(
+                      'assets/wallets/2.png',
+                      height: 24,
+                      width: 40,
+                    ),
+                    title: const Text('Cartão Correct'),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: Image.asset(
+                      'assets/wallets/4.png',
+                      height: 24,
+                      width: 40,
+                    ),
+                    title: const Text('Cartão Refeição'),
+                  ),
+                ],
+              )),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HelpView()));
+            },
+            leading: Image.asset(
+              'assets/home/help.png',
+              height: 24,
+              width: 40,
+            ),
+            title: const Text('Ajuda'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Image.asset(
+              'assets/home/message.png',
+              height: 24,
+              width: 40,
+            ),
+            title: const Text('Contato'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const IndicateBusinessView()));
+            },
+            leading: Icon(Icons.help),
+            title: const Text('Indicar comércio'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.help),
+            title: const Text('Indicar pessoa'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Image.asset(
+              'assets/home/exit.png',
+              height: 24,
+              width: 40,
+            ),
+            title: const Text('Sair da conta'),
+          ),
+        ]),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         height: size.height,
@@ -109,7 +190,7 @@ class _HomeViewState extends State<HomeView> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/home/token.png'),
+                      Image.asset('assets/home/home_token.png'),
                       Text(
                         'Token\nOffline',
                         style: GoogleFonts.outfit(
@@ -132,7 +213,7 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Image.asset('assets/home/ultimas_compras.png'),
                       Text(
-                        'Últinmas\nCompras',
+                        'Últimas\nCompras',
                         style: GoogleFonts.outfit(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -262,22 +343,28 @@ class _HomeViewState extends State<HomeView> {
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 30,
-                            color: Color(0xFF00788C),
-                          ),
-                          Text(
-                            'Ver tudo',
-                            style: GoogleFonts.outfit(
-                                textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            )),
-                          )
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ShowcaseView()));
+                        },
+                        child: Column(
+                          children: [
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 30,
+                              color: Color(0xFF00788C),
+                            ),
+                            Text(
+                              'Ver tudo',
+                              style: GoogleFonts.outfit(
+                                  textStyle: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              )),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   )

@@ -18,9 +18,12 @@ class _AppState extends State<App> {
             elevation: 0,
             backgroundColor: CustomColors.ligthGrey,
             toolbarHeight: 100),
-        inputDecorationTheme: InputDecorationTheme(
-          hintStyle: const TextStyle(color: CustomColors.white),
-          
+        checkboxTheme: const CheckboxThemeData(
+            fillColor: MaterialStatePropertyAll(CustomColors.grey),
+            checkColor: MaterialStatePropertyAll(CustomColors.blue),
+            side: BorderSide(color: CustomColors.blue, width: 2)),
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: CustomColors.white),
         ),
       ),
       debugShowCheckedModeBanner: false,

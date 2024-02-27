@@ -4,8 +4,8 @@ import 'package:mobile_create/app/presentation/utils/size.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/address_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/docs_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/selfie_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/welcome_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/widgets/border_button.dart';
-import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 
 class DetailsCheckView extends StatefulWidget {
   const DetailsCheckView({super.key});
@@ -29,18 +29,6 @@ class _DetailsCheckViewState extends State<DetailsCheckView> {
         width: getSize(context).width,
         child: Column(
           children: [
-            Expanded(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Olá, Francisco',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               flex: 4,
               child: Container(
@@ -171,7 +159,7 @@ class _DetailsCheckViewState extends State<DetailsCheckView> {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const HomeNavigationView()));
+                            builder: (context) => const WelcomeView()));
                       },
                       child: const BorderButon(
                         text: 'Prosseguir',

@@ -13,6 +13,21 @@ abstract class _FirstAccessControllerBase with Store {
   var getCepUseCase = GetIt.I.get<GetAddressUsecase>();
 
   @observable
+  bool privacyPolicies = false;
+
+  @observable
+  String cep = '';
+
+  @observable
+  String street = '';
+
+  @observable
+  String neighborhood = '';
+
+  @observable
+  String state = '';
+
+  @observable
   Uint8List? image;
 
   @observable
@@ -23,22 +38,28 @@ abstract class _FirstAccessControllerBase with Store {
 
   @observable
   AddressEntity addressEntity = AddressEntity(
-      zipCode: '',
-      street: '',
-      neighborhood: '',
-      city: '',
-      state: '',
-      number: '',
-      complement: '',
-      country: '');
+    zipCode: '',
+    street: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    number: '',
+    complement: '',
+  );
 
   @action
   Future<void> getCep() async {
     if (addressEntity.zipCode.length >= 8) {
-      print('Bateu');
-      final adress = await getCepUseCase.getAddress(addressEntity.zipCode);
+      final adress = await getCepUseCase.getAddress(cep);
       if (adress != null) {
         addressEntity = adress;
+
+        street = addressEntity.street;
+        neighborhood = addressEntity.neighborhood;
+        state = addressEntity.state;
+        print(street);
+        print(neighborhood);
+        print(state);
       }
     }
   }

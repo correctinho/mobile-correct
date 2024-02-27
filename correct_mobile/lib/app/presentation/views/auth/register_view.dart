@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/register_controller.dart';
-import 'package:mobile_create/app/presentation/utils/snack_bar.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 
@@ -15,19 +15,6 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   var registerController = GetIt.I.get<RegisterController>();
-
-  // Future signUpMiddleware() async {
-  //   bool res = await registerController.register();
-  //   if (res) {
-  //     if (mounted) {
-  //       Navigator.of(context).pushReplacementNamed('/home');
-  //     }
-  //   } else {
-  //     if (mounted) {
-  //       showSnackBar(context, 'Não foi possível fazer o Cadastro');
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +52,8 @@ class _RegisterViewState extends State<RegisterView> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            onChanged: (String value) =>
-                                registerController.cpf = value,
+                            onChanged: (String value) => registerController
+                                .ordinaryUserEntity.document = value,
                             keyboardType: TextInputType.number,
                             style: const TextStyle(color: CustomColors.white),
                             decoration: InputDecoration(
@@ -101,8 +88,8 @@ class _RegisterViewState extends State<RegisterView> {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            onChanged: (String value) =>
-                                registerController.email = value,
+                            onChanged: (String value) => registerController
+                                .ordinaryUserEntity.email = value,
                             style: const TextStyle(color: CustomColors.white),
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -205,16 +192,15 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     InkWell(
                       onTap: () async {
-                        await registerController.register();
-                        if (registerController.canRegister) {
-                          if (mounted) {
-                            showSnackBar(context, 'Usuário criado!');
-                          }
-                        } else {
-                          if (mounted) {
-                            showSnackBar(context, registerController.response);
-                          }
-                        }
+                        print('CPF ${registerController.ordinaryUserEntity.document}');
+                        print('email ${registerController.ordinaryUserEntity.email}');
+                        print('Senha ${registerController.password}');
+                        print('Confirmar senha ${registerController.confirmPass}');
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const DetailsCheckView(),
+                          ),
+                        );
                       },
                       child: const MainButton(
                         text: 'Sign Up',

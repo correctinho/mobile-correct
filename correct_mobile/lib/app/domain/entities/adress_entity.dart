@@ -17,6 +17,6 @@ class AddressEntity {
     required this.state,
     this.number,
     this.complement,
-    this.country,
+    this.country = 'Brasil',
   });
 }

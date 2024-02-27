@@ -1,5 +1,6 @@
 import 'package:mobile_create/app/data/datasource/remote/remote_data_source.dart';
 import 'package:mobile_create/app/domain/entities/adress_entity.dart';
+import 'package:mobile_create/app/domain/entities/ordinary_user_entity.dart';
 import 'package:mobile_create/app/domain/repositories/remote_repository.dart';
 
 class RemoteRepositoyImpl implements RemoteRepository {
@@ -13,8 +14,8 @@ class RemoteRepositoyImpl implements RemoteRepository {
   }
 
   @override
-  Future<String> registerUser(String cpf, String email, String password) async {
-    return await _remoteDataSource.registerUser(cpf, email, password);
+  Future<String> registerUser(OrdinaryUserEntity ordinaryUserEntity, String password) async {
+    return await _remoteDataSource.registerUser(ordinaryUserEntity, password);
   }
 
   @override

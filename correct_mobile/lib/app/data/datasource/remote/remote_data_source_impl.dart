@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:mobile_create/app/data/models/address_model.dart';
 import 'package:mobile_create/app/domain/entities/adress_entity.dart';
+import 'package:mobile_create/app/domain/entities/ordinary_user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mobile_create/app/data/datasource/remote/remote_data_source.dart';
@@ -87,12 +88,40 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<String> registerUser(String cpf, String email, String password) async {
+  Future<String> registerUser(
+      OrdinaryUserEntity ordinaryUserEntity, String password) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST',
-        Uri.parse('https://vercel-correct-backend.vercel.app/new-app-user'));
-    request.body =
-        json.encode({"cpf": cpf, "email": email, "password": password});
+        Uri.parse('https://api-correct-vercel.vercel.app/new-app-user'));
+
+    request.body = json.encode({
+      "document": ordinaryUserEntity.document,
+      "email": ordinaryUserEntity.email,
+      "password": password,
+      "document2": ordinaryUserEntity.document2,
+      "document3": ordinaryUserEntity.document3,
+      "full_name": ordinaryUserEntity.fullName,
+      "gender": ordinaryUserEntity.gender,
+      "date_of_birth": ordinaryUserEntity.dateOfBirth,
+      "phone": ordinaryUserEntity.phone,
+      "salary": ordinaryUserEntity.salary,
+      "function": ordinaryUserEntity.function,
+      "recomendation_code": ordinaryUserEntity.recomendationCode,
+      "martial_status": ordinaryUserEntity.maritalStatus,
+      "dependents_quantity": ordinaryUserEntity.dependentsQuantity,
+      "line1": ordinaryUserEntity.line1,
+      "line2": ordinaryUserEntity.line2,
+      "line3": ordinaryUserEntity.line3,
+      "postal_code": ordinaryUserEntity.postalCode,
+      "neighborhood": ordinaryUserEntity.neighborhood,
+      "city": ordinaryUserEntity.city,
+      "state": ordinaryUserEntity.state,
+      "country": ordinaryUserEntity.country,
+      "selfie_base64": ordinaryUserEntity.selfieBase64,
+      "document_front_base64": ordinaryUserEntity.documentFrontBase64,
+      "document_back_base64": ordinaryUserEntity.documentBackBase64,
+      "document_selfie_base64": ordinaryUserEntity.documentSelfieBase64
+    });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -162,6 +191,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       var response = await http.get(
         Uri.parse('https://viacep.com.br/ws/$cep/json'),
       );
+      print(response.body);
       return AddressModel.fromViaCep(jsonDecode(response.body));
     } catch (e, s) {
       log(e.toString());

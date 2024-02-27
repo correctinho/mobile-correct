@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/views/home/qrcode_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_view.dart';
 import 'package:mobile_create/app/presentation/views/profile/profile_view.dart';
@@ -29,28 +30,30 @@ class _HomeNavigationViewState extends State<HomeNavigationView> {
             icon: ImageIcon(
               AssetImage('assets/home/home.png'),
             ),
-            label: '',
+            label: 'Home',
           ),
           NavigationDestination(
               icon: ImageIcon(
-                AssetImage('assets/home/profile_home_navigation.png'),
+                AssetImage('assets/home/profile.png'),
+                color: CustomColors.black,
               ),
-              label: ''),
+              label: 'Perfil'),
           NavigationDestination(
               icon: ImageIcon(
                 AssetImage('assets/home/qr-code-outline.png'),
+                size: 35,
               ),
-              label: ''),
+              label: 'QR code'),
           NavigationDestination(
               icon: ImageIcon(
                 AssetImage('assets/home/wallet.png'),
               ),
-              label: ''),
+              label: 'Carteira'),
           NavigationDestination(
             icon: ImageIcon(
               AssetImage('assets/home/kart.png'),
             ),
-            label: '',
+            label: 'Carrinho',
           ),
         ],
       ),

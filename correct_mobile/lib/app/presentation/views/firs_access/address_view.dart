@@ -19,8 +19,7 @@ class _AddressViewState extends State<AddressView> {
 
   @override
   void initState() {
-    
-    reaction((p0) => firstAccessController.addressEntity.zipCode, (p0) {
+    reaction((p0) => firstAccessController.cep, (p0) {
       firstAccessController.getCep();
     });
     super.initState();
@@ -62,37 +61,36 @@ class _AddressViewState extends State<AddressView> {
                 'CEP',
                 style: TextStyle(fontSize: 20),
               ),
-              Observer(builder: (_) {
-                return Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10),
-                        color: CustomColors.grey.withOpacity(0.5),
-                        child: TextFormField(
-                          onChanged: (value) {
-                            firstAccessController.addressEntity.zipCode = value;
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: CustomColors.grey.withOpacity(0.5)),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10),
+                      color: CustomColors.grey.withOpacity(0.5),
+                      child: TextFormField(
+                        onChanged: (value) {
+                          firstAccessController.cep = value;
+                        },
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: CustomColors.grey.withOpacity(0.5)),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
-                    ),
-                  ],
-                );
-              }),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -112,11 +110,10 @@ class _AddressViewState extends State<AddressView> {
                             borderRadius: BorderRadius.circular(10),
                             color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
-                              onChanged: (value) {
-                                firstAccessController.addressEntity.street =
-                                    value;
-                              },
-                              keyboardType: TextInputType.number,
+                              enabled: false,
+                              controller: TextEditingController(
+                                  text: firstAccessController.street),
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -136,38 +133,40 @@ class _AddressViewState extends State<AddressView> {
                     width: 15,
                   ),
                   Expanded(
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'N°',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: CustomColors.grey.withOpacity(0.5),
-                            child: Observer(builder: (_) {
-                              return TextFormField(
-                                onChanged: (value) {
-                                  firstAccessController.addressEntity.number =
-                                      value;
-                                },
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            CustomColors.grey.withOpacity(0.5)),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'N°',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Material(
+                          borderRadius: BorderRadius.circular(10),
+                          color: CustomColors.grey.withOpacity(0.5),
+                          child: Observer(builder: (_) {
+                            return TextFormField(
+                              onChanged: (value) {
+                                firstAccessController.addressEntity.number =
+                                    value;
+                              },
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          CustomColors.grey.withOpacity(0.5)),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              );
-                            }),
-                          ),
-                        ],
-                      )),
+                              ),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -186,11 +185,10 @@ class _AddressViewState extends State<AddressView> {
                             borderRadius: BorderRadius.circular(10),
                             color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
-                              onChanged: (value) {
-                                firstAccessController
-                                    .addressEntity.neighborhood = value;
-                              },
-                              keyboardType: TextInputType.number,
+                              enabled: false,
+                              controller: TextEditingController(
+                                  text: firstAccessController.neighborhood),
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -223,17 +221,16 @@ class _AddressViewState extends State<AddressView> {
                             color: CustomColors.grey.withOpacity(0.5),
                             child: Observer(builder: (_) {
                               return TextFormField(
-                                onChanged: (value) {
-                                  firstAccessController.addressEntity.state =
-                                      value;
-                                },
-                                keyboardType: TextInputType.number,
+                                enabled: false,
+                                controller: TextEditingController(
+                                    text: firstAccessController.state),
+                                textAlign: TextAlign.center,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color:
-                                            CustomColors.grey.withOpacity(0.5)),
+                                        color: CustomColors.grey
+                                            .withOpacity(0.5)),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
@@ -260,11 +257,11 @@ class _AddressViewState extends State<AddressView> {
                             borderRadius: BorderRadius.circular(10),
                             color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
-                              onChanged: (value) {
-                                firstAccessController.addressEntity.country =
-                                    value;
-                              },
-                              keyboardType: TextInputType.number,
+                              enabled: false,
+                              controller: TextEditingController(
+                                  text: firstAccessController
+                                      .addressEntity.country),
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(

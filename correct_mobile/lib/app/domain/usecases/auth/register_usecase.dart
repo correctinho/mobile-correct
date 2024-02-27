@@ -1,3 +1,4 @@
+import 'package:mobile_create/app/domain/entities/ordinary_user_entity.dart';
 import 'package:mobile_create/app/domain/repositories/remote_repository.dart';
 
 class RegisterUsecase {
@@ -6,7 +7,7 @@ class RegisterUsecase {
   RegisterUsecase(this.remoteRepository);
 
   Future<String> registerUsecase(
-      String cpf, String email, String password) async {
-    return await remoteRepository.registerUser(cpf, email, password);
+      OrdinaryUserEntity ordinaryUserEntity, String password) async {
+    return await remoteRepository.registerUser(ordinaryUserEntity, password);
   }
 }
