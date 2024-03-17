@@ -23,51 +23,42 @@ class _KartViewState extends State<KartView> {
               height: 80,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(0, 2),
-                      spreadRadius: 2,
-                      blurRadius: 2,
-                      color: CustomColors.grey)
-                ],
+                boxShadow: [BoxShadow(offset: Offset(0, 2), spreadRadius: 2, blurRadius: 2, color: CustomColors.grey)],
               ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                // Image.asset('name'),
+                Column(
                   children: [
-                    Image.asset('name'),
-                    Column(
-                      children: [
-                        Text('Nome'),
-                        Text('Código'),
-                        Text('Preço'),
-                      ],
+                    Text('Nome'),
+                    Text('Código'),
+                    Text('Preço'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: CustomColors.grey,
+                      child: IconButton(
+                        color: CustomColors.white,
+                        icon: const Icon(Icons.remove),
+                        onPressed: () {},
+                      ),
                     ),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: CustomColors.grey,
-                          child: IconButton(
-                            color: CustomColors.white,
-                            icon: const Icon(Icons.remove),
-                            onPressed: () {},
-                          ),
-                        ),
-                        const Text(
-                          ' 1 ',
-                          style: TextStyle(
-                              fontSize: 22, color: CustomColors.secondaryGrey),
-                        ),
-                        CircleAvatar(
-                          backgroundColor: CustomColors.blue,
-                          child: IconButton(
-                            color: CustomColors.white,
-                            icon: const Icon(Icons.add),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    )
-                  ]),
+                    const Text(
+                      ' 1 ',
+                      style: TextStyle(fontSize: 22, color: CustomColors.secondaryGrey),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: CustomColors.blue,
+                      child: IconButton(
+                        color: CustomColors.white,
+                        icon: const Icon(Icons.add),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                )
+              ]),
             ),
           ),
         ),
@@ -82,13 +73,7 @@ class _KartViewState extends State<KartView> {
           height: 80,
           decoration: const BoxDecoration(
             color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  offset: Offset(0, 2),
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                  color: CustomColors.grey)
-            ],
+            boxShadow: [BoxShadow(offset: Offset(0, 2), spreadRadius: 2, blurRadius: 2, color: CustomColors.grey)],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,12 +82,10 @@ class _KartViewState extends State<KartView> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Total',
-                      style: TextStyle(color: CustomColors.secondaryGrey)),
+                  Text('Total', style: TextStyle(color: CustomColors.secondaryGrey)),
                   Text(
                     'R\$ 156,80',
-                    style: TextStyle(
-                        fontSize: 24, color: CustomColors.secondaryGrey),
+                    style: TextStyle(fontSize: 24, color: CustomColors.secondaryGrey),
                   ),
                 ],
               ),

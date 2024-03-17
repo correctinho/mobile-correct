@@ -4,6 +4,7 @@ import 'package:mobile_create/app/presentation/views/auth/login_or_signup_view.d
 import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/register_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/splash_view.dart';
+import 'package:mobile_create/app/presentation/views/home/showcase_view.dart';
 import 'package:mobile_create/app/presentation/views/legislation/legislation_view.dart';
 import 'package:mobile_create/app/presentation/views/profile/profile_view.dart';
 import 'package:mobile_create/app/presentation/views/shop/shop_home_view.dart';
@@ -22,5 +23,6 @@ var routes = {
   '/legislation': (_) => const LegislationView(),
   '/tourism': (_) => const TourismView(),
   '/wallets-list': (_) => const WalletsListView(),
-  '/profile': (_) => const ProfileView()
+  '/profile': (_) => const ProfileView(),
+  '/show-case-view': (_) => const ShowcaseView(),
 };
