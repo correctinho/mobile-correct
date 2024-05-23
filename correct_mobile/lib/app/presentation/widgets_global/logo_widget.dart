@@ -12,13 +12,11 @@ class LogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Image.asset(
-        'assets/png/logo_correct.png',
-        width: width,
-        height: height,
-        fit: BoxFit.contain,
-      ),
+    return Image.asset(
+      'assets/png/logo_correct.png',
+      width: width,
+      height: height,
+      fit: BoxFit.contain,
     );
   }
 }
