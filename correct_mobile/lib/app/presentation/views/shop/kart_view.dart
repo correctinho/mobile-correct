@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
+import 'package:mobile_create/app/presentation/views/shop/payment_kart.dart';
 
 class KartView extends StatefulWidget {
   const KartView({super.key});
@@ -9,6 +10,22 @@ class KartView extends StatefulWidget {
 }
 
 class _KartViewState extends State<KartView> {
+  int _counter = 1;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      if (_counter > 1) {
+        _counter--;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,8 +43,8 @@ class _KartViewState extends State<KartView> {
                 boxShadow: [BoxShadow(offset: Offset(0, 2), spreadRadius: 2, blurRadius: 2, color: CustomColors.grey)],
               ),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                // Image.asset('name'),
-                Column(
+                Image.asset('assets/png/product_kart.png'),
+                const Column(
                   children: [
                     Text('Nome'),
                     Text('Código'),
@@ -41,11 +58,13 @@ class _KartViewState extends State<KartView> {
                       child: IconButton(
                         color: CustomColors.white,
                         icon: const Icon(Icons.remove),
-                        onPressed: () {},
+                        onPressed: () {
+                          _decrementCounter();
+                        },
                       ),
                     ),
-                    const Text(
-                      ' 1 ',
+                    Text(
+                      '$_counter',
                       style: TextStyle(fontSize: 22, color: CustomColors.secondaryGrey),
                     ),
                     CircleAvatar(
@@ -53,7 +72,9 @@ class _KartViewState extends State<KartView> {
                       child: IconButton(
                         color: CustomColors.white,
                         icon: const Icon(Icons.add),
-                        onPressed: () {},
+                        onPressed: () {
+                          _incrementCounter();
+                        },
                       ),
                     ),
                   ],
@@ -100,18 +121,23 @@ class _KartViewState extends State<KartView> {
                     ),
                     color: CustomColors.blue,
                   ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Pagamento',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentKartView()));
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          'Pagamento',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

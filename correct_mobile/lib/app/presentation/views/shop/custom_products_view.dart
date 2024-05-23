@@ -21,16 +21,16 @@ class _CustomProductsViewState extends State<CustomProductsView> {
         leading: const Icon(Icons.square),
         centerTitle: true,
         elevation: 0,
-        actions: [
+        actions: const [
           Icon(Icons.badge),
           SizedBox(width: 5),
           CircleAvatar(radius: 15),
         ],
       ),
       body: Column(children: [
-        Expanded(
+        const Expanded(
           flex: 1,
-          child: const SearchBarWidget(),
+          child: SearchBarWidget(),
         ),
         Expanded(
           flex: 1,
@@ -41,17 +41,11 @@ class _CustomProductsViewState extends State<CustomProductsView> {
               children: [
                 Text(
                   'Tênis',
-                  style: TextStyle(
-                      color: CustomColors.backGroundColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
+                  style: TextStyle(color: CustomColors.backGroundColor, fontWeight: FontWeight.w500, fontSize: 18),
                 ),
                 Text(
                   'Ordenar por',
-                  style: TextStyle(
-                      color: CustomColors.backGroundColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12),
+                  style: TextStyle(color: CustomColors.backGroundColor, fontWeight: FontWeight.w500, fontSize: 12),
                 ),
               ],
             ),
