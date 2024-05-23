@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/views/home/help_view.dart';
 import 'package:mobile_create/app/presentation/views/home/indicate_business_view.dart';
-import 'package:mobile_create/app/presentation/widgets_global/advantage_showcase_widget.dart';
+import 'package:mobile_create/app/presentation/views/show_case/widget/advantage_showcase_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
