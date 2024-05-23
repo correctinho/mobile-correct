@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/core/routes.dart';
-import 'package:mobile_create/app/presentation/widgets_global/toast_error_widget.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
