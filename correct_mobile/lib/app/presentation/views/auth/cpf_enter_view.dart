@@ -4,7 +4,6 @@ import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
-import 'package:mobile_create/app/presentation/widgets_global/toast_error_widget.dart';
 
 class CpfEnterView extends StatefulWidget {
   const CpfEnterView({super.key});
@@ -69,12 +68,13 @@ class _CpfEnterViewState extends State<CpfEnterView> {
                       ),
                       InkWell(
                         onTap: () {
-                          _formKey.currentState!.validate();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginView(),
-                            ),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginView(),
+                              ),
+                            );
+                          }
                         },
                         child: const MainButton(
                           color: CustomColors.backGroundColor,
