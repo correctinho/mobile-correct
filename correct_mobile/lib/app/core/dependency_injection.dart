@@ -27,38 +27,25 @@ Future<void> initInjection() async {
   // DataSources
   getIt.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
   getIt.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
-  
+
   // Repositories
   getIt.registerLazySingleton<LocalRepository>(() => LocalRepositoryImpl(getIt()));
   getIt.registerLazySingleton<RemoteRepository>(() => RemoteRepositoyImpl(getIt()));
 
   // Usecases
-  getIt.registerLazySingleton<AuthFaceIdBioUsecase>(
-      () => AuthFaceIdBioUsecase(getIt()));
-  getIt.registerLazySingleton<RegisterUsecase>(
-      () => RegisterUsecase(getIt()));
-  getIt.registerLazySingleton<LoginUseCase>(
-      () => LoginUseCase(getIt()));
-  getIt.registerLazySingleton<LogoutUseCase>(
-      () => LogoutUseCase(getIt()));
-  getIt.registerLazySingleton<IsAuthenticatedUseCase>(
-      () => IsAuthenticatedUseCase(getIt()));
-  getIt.registerLazySingleton<IsFirstTimeUseCase>(
-      () => IsFirstTimeUseCase(getIt()));
-  getIt.registerLazySingleton<EndFirstTimeUseCase>(
-      () => EndFirstTimeUseCase(getIt()));
-  getIt.registerLazySingleton<GetAddressUsecase>(
-      () => GetAddressUsecase(getIt()));
+  getIt.registerLazySingleton<AuthFaceIdBioUsecase>(() => AuthFaceIdBioUsecase(getIt()));
+  getIt.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(getIt()));
+  getIt.registerLazySingleton<LoginUseCase>(() => LoginUseCase(getIt()));
+  getIt.registerLazySingleton<LogoutUseCase>(() => LogoutUseCase(getIt()));
+  getIt.registerLazySingleton<IsAuthenticatedUseCase>(() => IsAuthenticatedUseCase(getIt()));
+  getIt.registerLazySingleton<IsFirstTimeUseCase>(() => IsFirstTimeUseCase(getIt()));
+  getIt.registerLazySingleton<EndFirstTimeUseCase>(() => EndFirstTimeUseCase(getIt()));
+  getIt.registerLazySingleton<GetAddressUsecase>(() => GetAddressUsecase(getIt()));
 
   // Controllers
-  getIt.registerLazySingleton<HomeController>(
-      () => HomeController());
-  getIt.registerLazySingleton<AuthController>(
-      () => AuthController());
-  getIt.registerLazySingleton<RegisterController>(
-      () => RegisterController());
-  getIt.registerLazySingleton<TokenController>(
-      () => TokenController());
-  getIt.registerLazySingleton<FirstAccessController>(
-      () => FirstAccessController());
+  getIt.registerLazySingleton<HomeController>(() => HomeController());
+  getIt.registerLazySingleton<AuthController>(() => AuthController());
+  getIt.registerLazySingleton<RegisterController>(() => RegisterController());
+  getIt.registerLazySingleton<TokenController>(() => TokenController());
+  getIt.registerLazySingleton<FirstAccessController>(() => FirstAccessController());
 }
