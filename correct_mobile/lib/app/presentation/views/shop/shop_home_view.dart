@@ -27,7 +27,6 @@ class _HomeShopViewState extends State<HomeShopView> {
               'Carrinho',
               style: TextStyle(color: Colors.white),
             ),
-            leading: Image.asset('assets/ep_arrow-right.png'),
             centerTitle: true,
             elevation: 0,
             bottom: const TabBar(

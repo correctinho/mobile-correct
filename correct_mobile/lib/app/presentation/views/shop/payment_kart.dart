@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
-import 'package:mobile_create/app/presentation/views/shop/widgets/sucess_messeger_widget.dart';
 
 class PaymentKartView extends StatefulWidget {
   const PaymentKartView({super.key});
