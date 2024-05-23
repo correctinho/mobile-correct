@@ -21,31 +21,13 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Center(
-      child: Stack(
-        children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color(0xFF002B43),
-                    Color(0xFF002F48),
-                    Color(0xFF021E2D),
-                  ]),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: const LogoWidget(height: 200, width: 200),
-          )
-        ],
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: const LogoWidget(height: 240, width: 240),
+        ),
       ),
-    ));
+    );
   }
 }
