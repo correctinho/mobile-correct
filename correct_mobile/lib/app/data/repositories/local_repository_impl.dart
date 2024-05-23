@@ -13,12 +13,11 @@ class LocalRepositoryImpl implements LocalRepository {
   Future<bool> authFaceIdBio() async => await localDataSource.authFaceIdBio();
 
   @override
-  Future<bool> canAuthFaceIdBio() async =>
-      await localDataSource.canAuthFaceIdBio();
+  Future<bool> canAuthFaceIdBio() async => await localDataSource.canAuthFaceIdBio();
 
   @override
-  Future<bool> isFirstTime(String token) async {
-    return localDataSource.isFirstTime(token);
+  Future<bool> isFirstTime() async {
+    return localDataSource.isFirstTime();
   }
 
   @override

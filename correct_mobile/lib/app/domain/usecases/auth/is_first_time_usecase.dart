@@ -5,7 +5,7 @@ class IsFirstTimeUseCase {
 
   IsFirstTimeUseCase(this._localRepository);
 
-  Future<bool> isFirstTime(String token) async {
-    return _localRepository.isFirstTime(token);
+  Future<bool> isFirstTime() async {
+    return _localRepository.isFirstTime();
   }
 }

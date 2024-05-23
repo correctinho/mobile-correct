@@ -10,8 +10,7 @@ class LocalDataSourceImpl implements LocalDataSource {
   final LocalAuthentication _auth = LocalAuthentication();
 
   @override
-  Future<bool> canAuthFaceIdBio() async =>
-      await _auth.canCheckBiometrics || await _auth.isDeviceSupported();
+  Future<bool> canAuthFaceIdBio() async => await _auth.canCheckBiometrics || await _auth.isDeviceSupported();
 
   @override
   Future<bool> authFaceIdBio() async {
@@ -30,8 +29,7 @@ class LocalDataSourceImpl implements LocalDataSource {
             cancelButton: 'No thanks',
           ),
         ],
-        options: const AuthenticationOptions(
-            useErrorDialogs: true, stickyAuth: true),
+        options: const AuthenticationOptions(useErrorDialogs: true, stickyAuth: true),
       );
     } catch (e, s) {
       log(e.toString());
@@ -41,7 +39,7 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
   @override
-  Future<bool> isFirstTime(String token) async {
+  Future<bool> isFirstTime() async {
     const String first = 'first';
     var prefs = await SharedPreferences.getInstance();
 
@@ -49,7 +47,8 @@ class LocalDataSourceImpl implements LocalDataSource {
 
     if (jsonResult != null) {
       var mapUser = jsonDecode(jsonResult);
-      return mapUser['isFirstTime'];
+      print(" Deus me ajude ${mapUser}");
+      return mapUser['first'];
     }
 
     return false;

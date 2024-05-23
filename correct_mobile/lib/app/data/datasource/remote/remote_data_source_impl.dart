@@ -12,19 +12,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<String> loginUser(String cpf, String password) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('POST',
-        Uri.parse('https://vercel-correct-backend.vercel.app/login-app-user'));
-    request.body = json.encode({"cpf": cpf, "password": password});
+    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/login-app-user'));
+    request.body = json.encode({"document": cpf, "password": password});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
+      var responseString = await response.stream.bytesToString();
       const String key = 'key';
       const String first = 'first';
-      print(await response.stream.bytesToString());
-      Map<String, dynamic> responseMap =
-          jsonDecode(await response.stream.bytesToString());
+      print(responseString);
+      Map<String, dynamic> responseMap = jsonDecode(responseString);
 
       var prefs = await SharedPreferences.getInstance();
 
@@ -48,9 +47,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       );
 
-      log(await response.stream.bytesToString());
+      log(responseString);
       return 'logedin';
     } else {
+      print('socorrooo ${response.statusCode}');
       log(response.reasonPhrase ?? '');
       return 'não';
     }
@@ -88,50 +88,24 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<String> registerUser(
-      OrdinaryUserEntity ordinaryUserEntity, String password) async {
+  Future<String> registerUser(OrdinaryUserEntity ordinaryUserEntity, String password) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('POST',
-        Uri.parse('https://api-correct-vercel.vercel.app/new-app-user'));
+    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user'));
 
     request.body = json.encode({
       "document": ordinaryUserEntity.document,
       "email": ordinaryUserEntity.email,
       "password": password,
-      "document2": ordinaryUserEntity.document2,
-      "document3": ordinaryUserEntity.document3,
-      "full_name": ordinaryUserEntity.fullName,
-      "gender": ordinaryUserEntity.gender,
-      "date_of_birth": ordinaryUserEntity.dateOfBirth,
-      "phone": ordinaryUserEntity.phone,
-      "salary": ordinaryUserEntity.salary,
-      "function": ordinaryUserEntity.function,
-      "recomendation_code": ordinaryUserEntity.recomendationCode,
-      "martial_status": ordinaryUserEntity.maritalStatus,
-      "dependents_quantity": ordinaryUserEntity.dependentsQuantity,
-      "line1": ordinaryUserEntity.line1,
-      "line2": ordinaryUserEntity.line2,
-      "line3": ordinaryUserEntity.line3,
-      "postal_code": ordinaryUserEntity.postalCode,
-      "neighborhood": ordinaryUserEntity.neighborhood,
-      "city": ordinaryUserEntity.city,
-      "state": ordinaryUserEntity.state,
-      "country": ordinaryUserEntity.country,
-      "selfie_base64": ordinaryUserEntity.selfieBase64,
-      "document_front_base64": ordinaryUserEntity.documentFrontBase64,
-      "document_back_base64": ordinaryUserEntity.documentBackBase64,
-      "document_selfie_base64": ordinaryUserEntity.documentSelfieBase64
     });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-
+    if (response.statusCode == 201) {
+      print('aeeeeeeeeeee');
       return 'created';
     } else {
-      print(response.reasonPhrase);
+      print("socorrrro ${response.reasonPhrase}");
       return 'not created';
     }
     // print(cpf);

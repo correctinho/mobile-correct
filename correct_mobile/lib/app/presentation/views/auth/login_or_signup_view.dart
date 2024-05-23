@@ -16,107 +16,84 @@ class _LoginOrSignUpState extends State<LoginOrSignUp> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Center(
-            child: Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color(0xFF002B43),
-                Color(0xFF002F48),
-                Color(0xFF021E2D),
-              ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Suas compras geram cashback!',
+            style: TextStyle(
+              color: CustomColors.backGroundColor,
+              fontSize: 20,
             ),
           ),
-          height: size.height,
-          width: size.width,
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 80),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/login');
-                  },
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        side: const BorderSide(color: Color(0xFF9EFB72)),
+          const LogoWidget(height: 240, width: 240),
+          SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(23),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed('/cpf-enter-view');
+                    },
+                    child: Container(
+                      height: 60,
+                      width: double.infinity,
+                      decoration: ShapeDecoration(
+                        color: CustomColors.backGroundColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                          side: const BorderSide(
+                            color: Color(0xFF9EFB72),
+                            width: 3,
+                          ),
+                        ),
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                          color: CustomColors.white,
+                      child: const Center(
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: CustomColors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InkWell(
-                  onTap: () => Navigator.of(context).pushNamed('/sign-up'),
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: ShapeDecoration(
-                      color: CustomColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.of(context).pushNamed('/sign-up'),
+                    child: Container(
+                      height: 60,
+                      width: double.infinity,
+                      decoration: ShapeDecoration(
+                        color: CustomColors.buttonRegister,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Cadastro',
-                        style: TextStyle(
-                          color: Color(0xFF012B42),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                      child: const Center(
+                        child: Text(
+                          'Cadastro',
+                          style: TextStyle(
+                            color: Color(0xFF012B42),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ),
-        const Positioned(
-          top: 300,
-          left: 40,
-          child: SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                LogoWidget(height: 200, width: 200),
-                Text(
-                  'Suas compras geram cashback',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                      color: CustomColors.white),
-                )
-              ],
-            ),
-          ),
-        )
-      ],
-    )));
+          )
+        ],
+      ),
+    );
   }
 }

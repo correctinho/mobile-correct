@@ -6,6 +6,6 @@ class LoginUseCase {
   LoginUseCase(this.remoteRepository);
 
   Future<String> loginUseCase(String cpf, String password) async {
-    return await remoteRepository.loginUser(cpf, password);
+    return remoteRepository.loginUser(cpf, password);
   }
 }

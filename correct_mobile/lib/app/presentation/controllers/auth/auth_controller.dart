@@ -48,8 +48,8 @@ abstract class _AuthControllerBase with Store {
   }
 
   @action
-  Future isFirstTime(String token) async {
-    isFirst = await isFirstTimeUseCase.isFirstTime(token);
+  Future isFirstTime() async {
+    isFirst = await isFirstTimeUseCase.isFirstTime();
   }
 
   @action
