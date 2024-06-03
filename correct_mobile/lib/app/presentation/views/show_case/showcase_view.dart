@@ -23,10 +23,7 @@ class _ShowCaseViewState extends State<ShowCaseView> {
     ShowCaseListModel(text: 'Bem-estar', icon: Icons.medication_liquid_outlined),
     ShowCaseListModel(text: 'Combustível', icon: Icons.local_gas_station_outlined),
     ShowCaseListModel(text: 'Conveniências', icon: Icons.local_convenience_store_rounded),
-    ShowCaseListModel(
-      text: 'Lazer',
-      icon: Icons.movie_creation_outlined,
-    ),
+    ShowCaseListModel(text: 'Lazer', icon: Icons.movie_creation_outlined),
     ShowCaseListModel(text: 'brinquedos', icon: Icons.toys),
   ];
 
@@ -44,7 +41,7 @@ class _ShowCaseViewState extends State<ShowCaseView> {
         Navigator.pushNamed(context, '/combustivel');
         break;
       case 3:
-        Navigator.pushNamed(context, 'Conveniencia');
+        Navigator.pushNamed(context, '/Conveniencia');
         break;
       case 4:
         Navigator.pushNamed(context, '/lazer');

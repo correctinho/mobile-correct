@@ -40,10 +40,15 @@ class _AdvantageShowCaseWidgetState extends State<AdvantageShowCaseWidget> {
               Expanded(
                 child: Column(
                   children: [
-                    const Icon(
-                      Icons.fastfood,
-                      size: 30,
-                      color: Color(0xFF00788C),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/food');
+                      },
+                      child: const Icon(
+                        Icons.fastfood,
+                        size: 30,
+                        color: Color(0xFF00788C),
+                      ),
                     ),
                     Text(
                       'Alientação',
