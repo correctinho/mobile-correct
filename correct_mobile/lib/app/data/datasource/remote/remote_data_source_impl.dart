@@ -52,7 +52,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     } else {
       print('socorrooo ${response.statusCode}');
       log(response.reasonPhrase ?? '');
-      return 'não';
+      return 'CPF ou senha invalidos! Tente Novamente';
     }
 
     // var url = Uri.parse(
