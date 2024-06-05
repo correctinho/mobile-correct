@@ -68,7 +68,7 @@ class _RegisterViewState extends State<RegisterView> {
                               hinText: "E-mail",
                               obscureText: false,
                               validator: (val) {
-                                if (!val!.isValidEmail) return 'Enter valid email';
+                                if (!val!.isValidEmail) return 'Entre com um E-mail valido';
                                 return null;
                               }),
                           const SizedBox(
@@ -78,7 +78,7 @@ class _RegisterViewState extends State<RegisterView> {
                             onChanged: (String value) => registerController.password = value,
                             obscureText: false,
                             validator: (val) {
-                              if (!val!.isValidPassword) return 'Insira uma senha valida com pelo menos 8 caracteres';
+                              if (!val!.isValidPassword) return 'Senhas devem conter uma letra maiúscula e 8 caracteres';
                               return null;
                             },
                             style: const TextStyle(color: CustomColors.backGroundColor),
@@ -136,7 +136,11 @@ class _RegisterViewState extends State<RegisterView> {
                         );
                       }
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(const ToastErrorWidget(messageError: 'Usuario Ja cadastrado! Efuetuar login').build(context) as SnackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const ToastErrorWidget(
+                          messageError: 'Usuario Ja cadastrado! Efuetuar login',
+                        ).build(context) as SnackBar,
+                      );
                     }
                   },
                   child: const MainButton(

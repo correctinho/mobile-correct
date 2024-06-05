@@ -35,7 +35,7 @@ class _LoginOrSignUpState extends State<LoginOrSignUp> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed('/cpf-enter-view');
+                      Navigator.of(context).pushNamed('/login');
                     },
                     child: Container(
                       height: 60,
