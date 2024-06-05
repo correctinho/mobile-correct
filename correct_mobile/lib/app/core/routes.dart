@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mobile_create/app/presentation/views/auth/cpf_enter_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_view.dart';
