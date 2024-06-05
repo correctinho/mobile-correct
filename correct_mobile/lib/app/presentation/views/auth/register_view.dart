@@ -1,8 +1,11 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/register_controller.dart';
+import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/widgets/text_form_field_widget.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
@@ -41,14 +44,21 @@ class _RegisterViewState extends State<RegisterView> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          TextFormFieldWidget(
+                          TextFormField(
                             onChanged: (String value) => registerController.ordinaryUserEntity.document = value,
                             keyboardType: TextInputType.number,
-                            prefixIcon: const Icon(
-                              Icons.person,
-                              color: CustomColors.backGroundColor,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              CpfInputFormatter(),
+                            ],
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: CustomColors.backGroundColor,
+                              ),
+                              hintText: 'CPF',
+                              hintStyle: TextStyle(color: CustomColors.backGroundColor),
                             ),
-                            hinText: "CPF",
                             obscureText: false,
                             validator: (val) {
                               if (!val!.isValiCPF) return 'Insira um CPF valido';
@@ -150,7 +160,26 @@ class _RegisterViewState extends State<RegisterView> {
                     textColor: CustomColors.white,
                     borderRadius: 50,
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginView(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Já possui uma conta? Efetue seu login aqui',
+                    style: TextStyle(
+                      color: CustomColors.backGroundColor,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

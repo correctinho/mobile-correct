@@ -7,6 +7,7 @@ import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/auth_controller.dart';
 import 'package:mobile_create/app/presentation/utils/snack_bar.dart';
+import 'package:mobile_create/app/presentation/views/auth/register_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/token/token_view.dart';
@@ -146,6 +147,18 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RegisterView()));
+                },
+                child: const Text(
+                  'Não possui uma conta? Cadastre-se ja',
+                  style: TextStyle(
+                    color: CustomColors.backGroundColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              TextButton(
                 onPressed: () async {
                   await authController.authFaceIdBio();
                   if (authController.faceId) {
@@ -164,7 +177,7 @@ class _LoginViewState extends State<LoginView> {
                 },
                 child: const Text(
                   'Token Offline',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: CustomColors.backGroundColor),
                 ),
               )
             ],
