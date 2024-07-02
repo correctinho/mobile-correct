@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
-import 'package:mobile_create/app/presentation/views/firs_access/widgets/date_input_format.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/date_input_format.dart';
+
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 
