@@ -3,6 +3,6 @@ abstract class LocalDataSource {
   Future<bool> canAuthFaceIdBio();
   Future<bool> authFaceIdBio();
   // Set first time
-  Future<bool> isFirstTime(String token);
+  Future<bool> isFirstTime();
   Future<bool> endFirstTime(String token);
 }

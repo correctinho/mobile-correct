@@ -53,10 +53,7 @@ class _PrivacyPoliciesViewState extends State<PrivacyPoliciesView> {
             Row(
               children: [
                 Observer(builder: (_) {
-                  return Checkbox(
-                      value: firstAccessController.privacyPolicies,
-                      onChanged: (bool? value) =>
-                          firstAccessController.privacyPolicies = value!);
+                  return Checkbox(value: firstAccessController.privacyPolicies, onChanged: (bool? value) => firstAccessController.privacyPolicies = value!);
                 }),
                 const Text(
                   'Aceitar políticas de Privacidade ',
@@ -68,13 +65,14 @@ class _PrivacyPoliciesViewState extends State<PrivacyPoliciesView> {
               height: 20,
             ),
             InkWell(
-                onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const HomeNavigationView())),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeNavigationView())),
                 child: const MainButton(
-                    text: 'Começar a usar o aplicativo',
-                    color: CustomColors.blue,
-                    height: 50,
-                    textColor: CustomColors.whiteBlue)),
+                  text: 'Começar a usar o aplicativo',
+                  color: CustomColors.blue,
+                  height: 50,
+                  textColor: CustomColors.whiteBlue,
+                  borderRadius: 50,
+                )),
             const SizedBox(
               height: 20,
             ),

@@ -25,7 +25,7 @@ class OrdinaryUserEntity {
   String documentFrontBase64;
   String documentBackBase64;
   String documentSelfieBase64;
-  
+
   OrdinaryUserEntity({
     required this.document,
     required this.email,
@@ -53,6 +53,4 @@ class OrdinaryUserEntity {
     required this.documentBackBase64,
     required this.documentSelfieBase64,
   });
-
- 
 }

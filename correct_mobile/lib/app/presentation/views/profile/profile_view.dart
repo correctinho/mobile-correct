@@ -32,7 +32,7 @@ class _ProfileViewState extends State<ProfileView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('client.name}',
+                  Text('client.name',
                       style: GoogleFonts.mitr(
                         textStyle: const TextStyle(
                           color: CustomColors.white,
@@ -40,12 +40,9 @@ class _ProfileViewState extends State<ProfileView> {
                           fontWeight: FontWeight.w500,
                         ),
                       )),
-                  Text("Empresa: client.business}",
+                  Text("Empresa: client.business",
                       style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                            color: CustomColors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),
+                        textStyle: const TextStyle(color: CustomColors.white, fontSize: 15, fontWeight: FontWeight.w500),
                       )),
                 ],
               ),
@@ -54,29 +51,21 @@ class _ProfileViewState extends State<ProfileView> {
               padding: const EdgeInsets.all(35),
               height: size.height * 0.8,
               width: size.width,
-              decoration: const BoxDecoration(
-                  color: CustomColors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(28),
-                      topRight: Radius.circular(28))),
+              decoration: const BoxDecoration(color: CustomColors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(28), topRight: Radius.circular(28))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: size.height * 0.1,
-                    //color: Colors.green,
+                    height: 80,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'contato',
                           style: GoogleFonts.montserrat(
-                            textStyle: const TextStyle(
-                                color: Color(0xFF012B42),
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
+                            textStyle: const TextStyle(color: Color(0xFF012B42), fontSize: 18, fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
@@ -99,10 +88,7 @@ class _ProfileViewState extends State<ProfileView> {
                               Text(
                                 "client.email}",
                                 style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                      color: Color.fromARGB(255, 150, 150, 150),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400),
+                                  textStyle: const TextStyle(color: Color.fromARGB(255, 150, 150, 150), fontSize: 18, fontWeight: FontWeight.w400),
                                 ),
                               ),
                             ],
@@ -125,10 +111,7 @@ class _ProfileViewState extends State<ProfileView> {
                               Text(
                                 'client.phone',
                                 style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                      color: Color.fromARGB(255, 150, 150, 150),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400),
+                                  textStyle: const TextStyle(color: Color.fromARGB(255, 150, 150, 150), fontSize: 18, fontWeight: FontWeight.w400),
                                 ),
                               ),
                             ],
@@ -154,10 +137,7 @@ class _ProfileViewState extends State<ProfileView> {
                           padding: const EdgeInsets.all(7),
                           height: 61,
                           width: size.width,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 250, 182),
-                              border: Border.all(
-                                  color: const Color.fromARGB(71, 1, 43, 66))),
+                          decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 250, 182), border: Border.all(color: const Color.fromARGB(71, 1, 43, 66))),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,9 +174,7 @@ class _ProfileViewState extends State<ProfileView> {
                         Row(
                           children: [
                             Checkbox(
-                                side: MaterialStateBorderSide.resolveWith(
-                                    (states) => const BorderSide(
-                                        width: 2.0, color: CustomColors.black)),
+                                side: MaterialStateBorderSide.resolveWith((states) => const BorderSide(width: 2.0, color: CustomColors.black)),
                                 value: isChecked,
                                 checkColor: CustomColors.black,
                                 activeColor: CustomColors.white,
@@ -236,8 +214,7 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed('/home-navigation');
+                            Navigator.of(context).pushReplacementNamed('/home-navigation');
                           },
                           child: Container(
                             padding: const EdgeInsets.only(left: 10),

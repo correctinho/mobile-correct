@@ -14,17 +14,14 @@ class _ProductViewState extends State<ProductView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [Icon(Icons.heart_broken)],
+        actions: const [Icon(Icons.heart_broken)],
       ),
       body: Column(
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                          'assets/png/${widget.productModel.productId}.png'))),
+              decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/png/${widget.productModel.productId}.png'))),
             ),
           ),
           Expanded(

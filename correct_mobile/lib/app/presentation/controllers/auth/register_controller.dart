@@ -26,38 +26,38 @@ abstract class _RegisterControllerBase with Store {
 
   @observable
   OrdinaryUserEntity ordinaryUserEntity = OrdinaryUserEntity(
-      document: '',
-      email: '',
-      document2: '',
-      document3: '',
-      fullName: '',
-      gender: '',
-      dateOfBirth: '',
-      phone: '',
-      salary: '',
-      function: '',
-      recomendationCode: '',
-      maritalStatus: '',
-      dependentsQuantity: 0,
-      line1: '',
-      line2: '',
-      line3: '',
-      postalCode: '',
-      neighborhood: '',
-      city: '',
-      state: '',
-      country: '',
-      selfieBase64: '',
-      documentFrontBase64: '',
-      documentBackBase64: '',
-      documentSelfieBase64: '');
+    document: '',
+    email: '',
+    document2: '',
+    document3: '',
+    fullName: '',
+    gender: '',
+    dateOfBirth: '',
+    phone: '',
+    salary: '',
+    function: '',
+    recomendationCode: '',
+    maritalStatus: '',
+    dependentsQuantity: 0,
+    line1: '',
+    line2: '',
+    line3: '',
+    postalCode: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    country: '',
+    selfieBase64: '',
+    documentFrontBase64: '',
+    documentBackBase64: '',
+    documentSelfieBase64: '',
+  );
 
   @action
   Future<void> register() async {
     loading = true;
     if (confirmPass.isNotEmpty && password == confirmPass) {
-      response =
-          await registerUseCase.registerUsecase(ordinaryUserEntity, password);
+      response = await registerUseCase.registerUsecase(ordinaryUserEntity, password);
       if (response == 'created' && password == confirmPass) {
         canRegister = true;
       }

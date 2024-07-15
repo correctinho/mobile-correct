@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
-import 'package:mobile_create/app/core/shop_list_mock.dart';
 import 'package:mobile_create/app/presentation/views/shop/kart_view.dart';
 import 'package:mobile_create/app/presentation/views/shop/past_purchases_view.dart';
-import 'package:mobile_create/app/presentation/views/shop/product_view.dart';
-import 'package:mobile_create/app/presentation/views/shop/widgets/main_cards_widget.dart';
-import 'package:mobile_create/app/presentation/views/shop/widgets/search_bar_widget.dart';
-import 'package:mobile_create/app/presentation/views/shop/widgets/small_cards_widget.dart';
 
 class HomeShopView extends StatefulWidget {
   // final List<ProcutModel> products;
@@ -29,8 +23,10 @@ class _HomeShopViewState extends State<HomeShopView> {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: CustomColors.blue,
-            title: const Text('Carrinho', style: TextStyle(color: Colors.white),),
-            leading: Image.asset('assets/ep_arrow-right.png'),
+            title: const Text(
+              'Carrinho',
+              style: TextStyle(color: Colors.white),
+            ),
             centerTitle: true,
             elevation: 0,
             bottom: const TabBar(
@@ -48,7 +44,7 @@ class _HomeShopViewState extends State<HomeShopView> {
             ),
           ),
           body: const Padding(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(24),
             child: TabBarView(children: [KartView(), PastPurchasesView()]),
           )),
     );

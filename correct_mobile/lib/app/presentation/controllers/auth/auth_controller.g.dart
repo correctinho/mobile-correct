@@ -141,8 +141,8 @@ mixin _$AuthController on _AuthControllerBase, Store {
       AsyncAction('_AuthControllerBase.isFirstTime', context: context);
 
   @override
-  Future<dynamic> isFirstTime(String token) {
-    return _$isFirstTimeAsyncAction.run(() => super.isFirstTime(token));
+  Future<dynamic> isFirstTime() {
+    return _$isFirstTimeAsyncAction.run(() => super.isFirstTime());
   }
 
   late final _$endFirstTimeAsyncAction =

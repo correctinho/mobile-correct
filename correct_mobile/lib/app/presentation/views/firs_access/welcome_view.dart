@@ -23,14 +23,11 @@ class _WelcomeViewState extends State<WelcomeView> {
             height: getSize(context).height,
             width: getSize(context).width,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[
-                    Color(0xFF002B43),
-                    Color(0xFF002F48),
-                    Color(0xFF021E2D),
-                  ]),
+              gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: <Color>[
+                Color(0xFF002B43),
+                Color(0xFF002F48),
+                Color(0xFF021E2D),
+              ]),
             ),
           ),
           Container(
@@ -38,38 +35,36 @@ class _WelcomeViewState extends State<WelcomeView> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Expanded(
+                const Expanded(
                   flex: 1,
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Bem-vindo, “Francisco”.',
-                        style: TextStyle(
-                            color: CustomColors.ligthGrey, fontSize: 24),
+                        style: TextStyle(color: CustomColors.ligthGrey, fontSize: 24),
                       )),
                 ),
-                Expanded(
+                const Expanded(
                   flex: 1,
                   child: Text(
                     'Porem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ',
-                    style:
-                        TextStyle(color: CustomColors.ligthGrey, fontSize: 20),
+                    style: TextStyle(color: CustomColors.ligthGrey, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const Expanded(
-                    flex: 1, child: LogoWidget(height: 200, width: 200)),
+                const Expanded(flex: 1, child: LogoWidget(height: 200, width: 200)),
                 const SizedBox(
                   height: 20,
                 ),
                 InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const PrivacyPoliciesView())),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrivacyPoliciesView())),
                     child: const MainButton(
-                        text: 'Continuar',
-                        color: CustomColors.whiteBlue,
-                        height: 50,
-                        textColor: CustomColors.blue)),
+                      text: 'Continuar',
+                      color: CustomColors.whiteBlue,
+                      height: 50,
+                      textColor: CustomColors.blue,
+                      borderRadius: 50,
+                    )),
                 const SizedBox(
                   height: 20,
                 )

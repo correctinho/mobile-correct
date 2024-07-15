@@ -15,15 +15,32 @@ class _AppState extends State<App> {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-            elevation: 0,
-            backgroundColor: CustomColors.ligthGrey,
-            toolbarHeight: 100),
+          elevation: 0,
+          backgroundColor: CustomColors.ligthGrey,
+          toolbarHeight: 100,
+        ),
         checkboxTheme: const CheckboxThemeData(
-            fillColor: MaterialStatePropertyAll(CustomColors.grey),
-            checkColor: MaterialStatePropertyAll(CustomColors.blue),
-            side: BorderSide(color: CustomColors.blue, width: 2)),
-        inputDecorationTheme: const InputDecorationTheme(
-          hintStyle: TextStyle(color: CustomColors.white),
+          fillColor: MaterialStatePropertyAll(CustomColors.grey),
+          checkColor: MaterialStatePropertyAll(CustomColors.blue),
+          side: BorderSide(
+            color: CustomColors.blue,
+            width: 2,
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: const TextStyle(color: CustomColors.white),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50),
+            borderSide: const BorderSide(
+              color: CustomColors.backGroundColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(50),
+            borderSide: const BorderSide(color: CustomColors.backGroundColor),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 14.0),
         ),
       ),
       debugShowCheckedModeBanner: false,

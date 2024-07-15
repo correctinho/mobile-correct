@@ -5,8 +5,8 @@ class MainButton extends StatelessWidget {
   final String text;
   final Color color;
   final Color textColor;
-
   final double height;
+  final double borderRadius;
 
   const MainButton({
     Key? key,
@@ -14,6 +14,7 @@ class MainButton extends StatelessWidget {
     required this.color,
     required this.height,
     required this.textColor,
+    required this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -23,14 +24,13 @@ class MainButton extends StatelessWidget {
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
       ),
       child: Center(
         child: Text(
           text,
-          style: TextStyle(
-              color: textColor, fontWeight: FontWeight.w500, fontSize: 22),
+          style: TextStyle(color: textColor, fontWeight: FontWeight.w500, fontSize: 22),
         ),
       ),
     );
