@@ -6,8 +6,8 @@ import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/register_controller.dart';
 import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
+import 'package:mobile_create/app/presentation/views/auth/success_register_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/widgets/text_form_field_widget.dart';
-import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/toast_error_widget.dart';
@@ -45,7 +45,7 @@ class _RegisterViewState extends State<RegisterView> {
                       child: Column(
                         children: [
                           TextFormField(
-                            onChanged: (String value) => registerController.ordinaryUserEntity.document = value,
+                            onChanged: (String value) => registerController.userIdentityInfoModel.document = value,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
@@ -69,7 +69,7 @@ class _RegisterViewState extends State<RegisterView> {
                             height: 15,
                           ),
                           TextFormFieldWidget(
-                              onChanged: (String value) => registerController.ordinaryUserEntity.email = value,
+                              onChanged: (String value) => registerController.userIdentityInfoModel.email = value,
                               keyboardType: TextInputType.emailAddress,
                               prefixIcon: const Icon(
                                 Icons.mail,
@@ -85,7 +85,7 @@ class _RegisterViewState extends State<RegisterView> {
                             height: 15,
                           ),
                           TextFormField(
-                            onChanged: (String value) => registerController.password = value,
+                            onChanged: (String value) => registerController.userIdentityInfoModel.password = value,
                             obscureText: false,
                             validator: (val) {
                               if (!val!.isValidPassword) return 'Senhas devem conter uma letra maiúscula e 8 caracteres';
@@ -111,10 +111,10 @@ class _RegisterViewState extends State<RegisterView> {
                               if (val!.isEmpty) {
                                 return 'Por favor, confirme sua senha';
                               }
-                              if (val != registerController.password) {
+                              if (val != registerController.userIdentityInfoModel.password) {
                                 return 'As senhas não coincidem';
                               }
-                              return null; // Retorna null se a confirmação da senha for válida
+                              return null;
                             },
                             decoration: const InputDecoration(
                               prefixIcon: Icon(
@@ -131,19 +131,33 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     try {
                       if (_formKey.currentState!.validate()) {
-                        print('CPF ${registerController.ordinaryUserEntity.document}');
-                        print('email ${registerController.ordinaryUserEntity.email}');
-                        print('Senha ${registerController.password}');
-                        print('Confirmar senha ${registerController.confirmPass}');
-                        registerController.register();
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsCheckView(),
-                          ),
-                        );
+                        await registerController.register();
+                        if (registerController.response == 'created') {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RegistrationResponseWidget(
+                                text: 'Obaa!! Sua conta Correct foi criada. É um prazer tê-lo conosco',
+                                img: 'assets/png/robot_success.png',
+                                route: '/login',
+                                textButton: 'Começar a usar o App',
+                              ),
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RegistrationResponseWidget(
+                                text: 'Ops!! Sua conta Correct, infelizmente, não foi criada. Usuário Já cadastrado',
+                                img: 'assets/png/robot_error.png',
+                                route: '/sign-up',
+                                textButton: 'Tente Novamente',
+                              ),
+                            ),
+                          );
+                        }
                       }
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -159,6 +173,7 @@ class _RegisterViewState extends State<RegisterView> {
                     height: 60,
                     textColor: CustomColors.white,
                     borderRadius: 50,
+                    fontSize: 22,
                   ),
                 ),
                 const SizedBox(

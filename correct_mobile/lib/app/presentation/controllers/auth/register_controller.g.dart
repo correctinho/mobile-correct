@@ -9,22 +9,6 @@ part of 'register_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterController on _RegisterControllerBase, Store {
-  late final _$passwordAtom =
-      Atom(name: '_RegisterControllerBase.password', context: context);
-
-  @override
-  String get password {
-    _$passwordAtom.reportRead();
-    return super.password;
-  }
-
-  @override
-  set password(String value) {
-    _$passwordAtom.reportWrite(value, super.password, () {
-      super.password = value;
-    });
-  }
-
   late final _$confirmPassAtom =
       Atom(name: '_RegisterControllerBase.confirmPass', context: context);
 
@@ -89,19 +73,54 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
-  late final _$ordinaryUserEntityAtom = Atom(
-      name: '_RegisterControllerBase.ordinaryUserEntity', context: context);
+  late final _$userIdentityInfoModelAtom = Atom(
+      name: '_RegisterControllerBase.userIdentityInfoModel', context: context);
 
   @override
-  OrdinaryUserEntity get ordinaryUserEntity {
-    _$ordinaryUserEntityAtom.reportRead();
-    return super.ordinaryUserEntity;
+  UserIdentityInfoModel get userIdentityInfoModel {
+    _$userIdentityInfoModelAtom.reportRead();
+    return super.userIdentityInfoModel;
   }
 
   @override
-  set ordinaryUserEntity(OrdinaryUserEntity value) {
-    _$ordinaryUserEntityAtom.reportWrite(value, super.ordinaryUserEntity, () {
-      super.ordinaryUserEntity = value;
+  set userIdentityInfoModel(UserIdentityInfoModel value) {
+    _$userIdentityInfoModelAtom.reportWrite(value, super.userIdentityInfoModel,
+        () {
+      super.userIdentityInfoModel = value;
+    });
+  }
+
+  late final _$userAdditionalInfoModelAtom = Atom(
+      name: '_RegisterControllerBase.userAdditionalInfoModel',
+      context: context);
+
+  @override
+  UserAdditionalInfoModel get userAdditionalInfoModel {
+    _$userAdditionalInfoModelAtom.reportRead();
+    return super.userAdditionalInfoModel;
+  }
+
+  @override
+  set userAdditionalInfoModel(UserAdditionalInfoModel value) {
+    _$userAdditionalInfoModelAtom
+        .reportWrite(value, super.userAdditionalInfoModel, () {
+      super.userAdditionalInfoModel = value;
+    });
+  }
+
+  late final _$addressModelAtom =
+      Atom(name: '_RegisterControllerBase.addressModel', context: context);
+
+  @override
+  AddressModel get addressModel {
+    _$addressModelAtom.reportRead();
+    return super.addressModel;
+  }
+
+  @override
+  set addressModel(AddressModel value) {
+    _$addressModelAtom.reportWrite(value, super.addressModel, () {
+      super.addressModel = value;
     });
   }
 
@@ -113,15 +132,36 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     return _$registerAsyncAction.run(() => super.register());
   }
 
+  late final _$registerAdditionalInfoAsyncAction = AsyncAction(
+      '_RegisterControllerBase.registerAdditionalInfo',
+      context: context);
+
+  @override
+  Future<void> registerAdditionalInfo() {
+    return _$registerAdditionalInfoAsyncAction
+        .run(() => super.registerAdditionalInfo());
+  }
+
+  late final _$registerUserAddressAsyncAction = AsyncAction(
+      '_RegisterControllerBase.registerUserAddress',
+      context: context);
+
+  @override
+  Future<void> registerUserAddress() {
+    return _$registerUserAddressAsyncAction
+        .run(() => super.registerUserAddress());
+  }
+
   @override
   String toString() {
     return '''
-password: ${password},
 confirmPass: ${confirmPass},
 response: ${response},
 canRegister: ${canRegister},
 loading: ${loading},
-ordinaryUserEntity: ${ordinaryUserEntity}
+userIdentityInfoModel: ${userIdentityInfoModel},
+userAdditionalInfoModel: ${userAdditionalInfoModel},
+addressModel: ${addressModel}
     ''';
   }
 }
