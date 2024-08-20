@@ -82,6 +82,7 @@ class _CpfEnterViewState extends State<CpfEnterView> {
                           height: 50,
                           textColor: CustomColors.white,
                           borderRadius: 10,
+                          fontSize: 22,
                         ),
                       ),
                     ],
