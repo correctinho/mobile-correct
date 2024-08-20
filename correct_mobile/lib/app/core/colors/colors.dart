@@ -14,4 +14,5 @@ class CustomColors {
   static const colorGradientLinear01 = Color(0xFF00788C);
   static const blue = Color(0xFF024C74);
   static const buttonRegister = Color(0xFFF0FAFD);
+  static const ligthBlue = Color(0xFF2494F4);
 }
