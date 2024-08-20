@@ -64,6 +64,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       height: 50,
                       textColor: CustomColors.blue,
                       borderRadius: 50,
+                      fontSize: 22,
                     )),
                 const SizedBox(
                   height: 20,
