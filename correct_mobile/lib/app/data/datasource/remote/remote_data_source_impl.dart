@@ -50,8 +50,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       log(responseString);
       return 'logedin';
     } else {
-      print('socorrooo ${response.statusCode}');
-      log(response.reasonPhrase ?? '');
       return 'CPF ou senha invalidos! Tente Novamente';
     }
   }
@@ -75,7 +73,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<String> registerUserAddress(AddressModel addressModel) async {
-    var headers = {'Content-Type': 'application/json'};
+    final prefs = await SharedPreferences.getInstance();
+    final tokenJson = prefs.getString('key');
+    final tokenMap = jsonDecode(tokenJson!);
+    final token = tokenMap['token'];
+    var headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'};
     var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user/address'));
 
     request.body = addressModel.toJson();
@@ -84,10 +86,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 201) {
-      print('aeeeeeeeeeee');
       return 'created';
     } else {
-      print("socorrrro ${response.reasonPhrase}");
       return 'not created';
     }
   }
@@ -121,13 +121,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
     http.StreamedResponse response = await request.send();
 
-    final responseBody = await response.stream.bytesToString();
-
     if (response.statusCode == 201) {
-      print('aeeeeeeeeeee');
       return 'added';
     } else {
-      print("socorrrro ${response.reasonPhrase} ${responseBody} ${request.body}");
       return 'not added';
     }
   }
@@ -150,11 +146,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       var response = await http.get(
         Uri.parse('https://viacep.com.br/ws/$cep/json'),
       );
-      print(response.body);
       return AddressModel.fromViaCep(jsonDecode(response.body));
     } catch (e, s) {
-      log(e.toString());
-      log(s.toString());
+      log('error: $e');
+      log("stack: $s");
       return null;
     }
   }
