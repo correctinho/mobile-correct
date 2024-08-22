@@ -75,12 +75,13 @@ class _AddressViewState extends State<AddressView> {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+                            border: InputBorder.none,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                            )),
                       ),
                     ),
                   ),
@@ -109,16 +110,16 @@ class _AddressViewState extends State<AddressView> {
                             borderRadius: BorderRadius.circular(10),
                             color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
-                              enabled: false,
                               controller: TextEditingController(text: firstAccessController.street),
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  )),
                             ),
                           )
                         ],
@@ -144,16 +145,18 @@ class _AddressViewState extends State<AddressView> {
                             return TextFormField(
                               onChanged: (value) {
                                 firstAccessController.addressEntity.number = value;
+                                firstAccessController.addressModel = firstAccessController.addressModel.copyWith(number: value);
                               },
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  )),
                             );
                           }),
                         ),
@@ -178,16 +181,16 @@ class _AddressViewState extends State<AddressView> {
                             borderRadius: BorderRadius.circular(10),
                             color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
-                              enabled: false,
                               controller: TextEditingController(text: firstAccessController.neighborhood),
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
+                                  )),
                             ),
                           )
                         ],
@@ -273,8 +276,7 @@ class _AddressViewState extends State<AddressView> {
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () async {
-                    print(firstAccessController.street);
-                    Navigator.of(context).pop();
+                    firstAccessController.registerUserAddress();
                   },
                   child: const BorderButon(
                     text: 'Salvar',

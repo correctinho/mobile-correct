@@ -137,6 +137,22 @@ mixin _$FirstAccessController on _FirstAccessControllerBase, Store {
     });
   }
 
+  late final _$responseAtom =
+      Atom(name: '_FirstAccessControllerBase.response', context: context);
+
+  @override
+  String get response {
+    _$responseAtom.reportRead();
+    return super.response;
+  }
+
+  @override
+  set response(String value) {
+    _$responseAtom.reportWrite(value, super.response, () {
+      super.response = value;
+    });
+  }
+
   late final _$addressEntityAtom =
       Atom(name: '_FirstAccessControllerBase.addressEntity', context: context);
 
@@ -153,12 +169,38 @@ mixin _$FirstAccessController on _FirstAccessControllerBase, Store {
     });
   }
 
+  late final _$addressModelAtom =
+      Atom(name: '_FirstAccessControllerBase.addressModel', context: context);
+
+  @override
+  AddressModel get addressModel {
+    _$addressModelAtom.reportRead();
+    return super.addressModel;
+  }
+
+  @override
+  set addressModel(AddressModel value) {
+    _$addressModelAtom.reportWrite(value, super.addressModel, () {
+      super.addressModel = value;
+    });
+  }
+
   late final _$getCepAsyncAction =
       AsyncAction('_FirstAccessControllerBase.getCep', context: context);
 
   @override
   Future<void> getCep() {
     return _$getCepAsyncAction.run(() => super.getCep());
+  }
+
+  late final _$registerUserAddressAsyncAction = AsyncAction(
+      '_FirstAccessControllerBase.registerUserAddress',
+      context: context);
+
+  @override
+  Future<void> registerUserAddress() {
+    return _$registerUserAddressAsyncAction
+        .run(() => super.registerUserAddress());
   }
 
   @override
@@ -172,7 +214,9 @@ state: ${state},
 image: ${image},
 front: ${front},
 back: ${back},
-addressEntity: ${addressEntity}
+response: ${response},
+addressEntity: ${addressEntity},
+addressModel: ${addressModel}
     ''';
   }
 }
