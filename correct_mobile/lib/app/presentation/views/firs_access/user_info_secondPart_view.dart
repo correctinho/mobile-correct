@@ -154,12 +154,6 @@ class _UserInfoSecondPartViewState extends State<UserInfoSecondPartView> {
                 child: Observer(builder: (_) {
                   return InkWell(
                     onTap: () async {
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.dependentsQuantity.runtimeType} - ${registerController.userAdditionalInfoModel.dependentsQuantity}');
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.gender.runtimeType} - ${registerController.userAdditionalInfoModel.gender}');
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.fullname.runtimeType} - ${registerController.userAdditionalInfoModel.fullname}');
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.dateOfBirth.runtimeType} - ${registerController.userAdditionalInfoModel.dateOfBirth}');
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.document2.runtimeType} - ${registerController.userAdditionalInfoModel.document2}');
-                      print('Valor a ser enviado: ${registerController.userAdditionalInfoModel.document3.runtimeType} - ${registerController.userAdditionalInfoModel.document3}');
                       await registerController.registerAdditionalInfo();
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserInfoSecondPartView()));
