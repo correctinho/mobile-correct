@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
-import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 
-class SuccessRegisterView extends StatefulWidget {
-  const SuccessRegisterView({super.key});
+class RegistrationResponseWidget extends StatelessWidget {
+  final String text;
+  final String img;
+  final String route;
+  final String textButton;
+  const RegistrationResponseWidget({
+    super.key,
+    required this.text,
+    required this.img,
+    required this.route,
+    required this.textButton,
+  });
 
-  @override
-  State<SuccessRegisterView> createState() => _SuccessRegisterViewState();
-}
-
-class _SuccessRegisterViewState extends State<SuccessRegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +25,11 @@ class _SuccessRegisterViewState extends State<SuccessRegisterView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/png/robot_success.png'),
-                const Text(
-                  'Obaa!! Sua conta Correct foi criada. É um prazer tê-lo conosco',
+                Image.asset(img),
+                Text(
+                  text,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
                   ),
@@ -39,14 +43,10 @@ class _SuccessRegisterViewState extends State<SuccessRegisterView> {
             left: 40,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginView(),
-                  ),
-                );
+                Navigator.popAndPushNamed(context, route);
               },
-              child: const MainButton(
-                text: 'Começar a usar o App',
+              child: MainButton(
+                text: textButton,
                 color: CustomColors.ligthBlue,
                 height: 54,
                 textColor: CustomColors.white,

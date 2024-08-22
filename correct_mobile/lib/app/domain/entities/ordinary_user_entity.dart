@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class OrdinaryUserEntity {
   String document;
+  String password;
   String email;
   String document2;
   String document3;
@@ -29,6 +30,7 @@ class OrdinaryUserEntity {
   OrdinaryUserEntity({
     required this.document,
     required this.email,
+    required this.password,
     required this.document2,
     required this.document3,
     required this.fullName,

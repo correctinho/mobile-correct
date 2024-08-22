@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:mobile_create/app/data/models/address_model.dart';
+import 'package:mobile_create/app/data/models/user_register_model.dart';
 import 'package:mobile_create/app/domain/entities/adress_entity.dart';
-import 'package:mobile_create/app/domain/entities/ordinary_user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mobile_create/app/data/datasource/remote/remote_data_source.dart';
@@ -11,8 +11,8 @@ import 'package:http/http.dart' as http;
 class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<String> loginUser(String cpf, String password) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/login-app-user'));
+    final headers = {'Content-Type': 'application/json'};
+    final request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/login-app-user'));
     request.body = json.encode({"document": cpf, "password": password});
     request.headers.addAll(headers);
 
@@ -50,86 +50,46 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       log(responseString);
       return 'logedin';
     } else {
-      print('socorrooo ${response.statusCode}');
-      log(response.reasonPhrase ?? '');
       return 'CPF ou senha invalidos! Tente Novamente';
     }
-
-    // var url = Uri.parse(
-    //   'https://vercel-correct-backend.vercel.app/login-app-user',
-    // );
-
-    // var response = await http.post(url,
-    //     body: jsonEncode(
-    //       {"cpf": cpf, "senha": password},
-    //     ),
-    //     headers: {"Content-Type": "application/json"});
-    // Map<String, dynamic> responseMap = jsonDecode(response.body);
-    // print(cpf);
-    // print(password);
-    // print(response.statusCode);
-    // print(responseMap);
-
-    // if (response.statusCode == 200) {
-    //   const String key = 'key';
-
-    //   var prefs = await SharedPreferences.getInstance();
-
-    //   prefs.setString(
-    //     key,
-    //     jsonEncode(
-    //       {"token": responseMap['token'], "isAuth": true},
-    //     ),
-    //   );
-    //   return 'logedIn';
-    // } else {
-    //   return responseMap['error'];
-    // }
   }
 
   @override
-  Future<String> registerUser(OrdinaryUserEntity ordinaryUserEntity, String password) async {
+  Future<String> registerUserIdentity(UserIdentityInfoModel userIdentityInfoModel) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user'));
 
-    request.body = json.encode({
-      "document": ordinaryUserEntity.document,
-      "email": ordinaryUserEntity.email,
-      "password": password,
-    });
+    request.body = userIdentityInfoModel.toJson();
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 201) {
-      print('aeeeeeeeeeee');
       return 'created';
     } else {
-      print("socorrrro ${response.reasonPhrase}");
       return 'not created';
     }
-    // print(cpf);
-    // print(email);
-    // print(password);
-    // print(
-    //   jsonEncode(
-    //     {"cpf": cpf, "email": email, "senha": password},
-    //   ),
-    // );
-    // var url =
-    //     Uri.parse('https://vercel-correct-backend.vercel.app/new-app-user');
-    // var response = await http.post(url,
-    //     body: jsonEncode(
-    //       {"cpf": cpf, "email": email, "senha": password},
-    //     ),
-    //     headers: {"Content-Type": "application/json"});
-    // print(response.statusCode);
-    // print(response.body);
-    // if (response.statusCode == 201) {
-    //   return 'created';
-    // } else {
-    //   return 'erro';
-    // }
+  }
+
+  @override
+  Future<String> registerUserAddress(AddressModel addressModel) async {
+    final prefs = await SharedPreferences.getInstance();
+    final tokenJson = prefs.getString('key');
+    final tokenMap = jsonDecode(tokenJson!);
+    final token = tokenMap['token'];
+    var headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'};
+    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user/address'));
+
+    request.body = addressModel.toJson();
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      return 'created';
+    } else {
+      return 'not created';
+    }
   }
 
   @override
@@ -145,6 +105,27 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     }
 
     return false;
+  }
+
+  @override
+  Future<String> registerAdditionalInfo(UserAdditionalInfoModel userAdditionalInfoModel) async {
+    final prefs = await SharedPreferences.getInstance();
+    final tokenJson = prefs.getString('key');
+    final tokenMap = jsonDecode(tokenJson!);
+    final token = tokenMap['token'];
+    var headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'};
+    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user/info'));
+
+    request.body = userAdditionalInfoModel.toJson();
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      return 'added';
+    } else {
+      return 'not added';
+    }
   }
 
   @override
@@ -165,11 +146,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       var response = await http.get(
         Uri.parse('https://viacep.com.br/ws/$cep/json'),
       );
-      print(response.body);
       return AddressModel.fromViaCep(jsonDecode(response.body));
     } catch (e, s) {
-      log(e.toString());
-      log(s.toString());
+      log('error: $e');
+      log("stack: $s");
       return null;
     }
   }

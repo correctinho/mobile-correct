@@ -13,6 +13,8 @@ import 'package:mobile_create/app/domain/usecases/auth/is_authenticated.dart';
 import 'package:mobile_create/app/domain/usecases/auth/is_first_time_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/login_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/logout_usecase.dart';
+import 'package:mobile_create/app/domain/usecases/auth/registerAdditionalInfo_usecase.dart';
+import 'package:mobile_create/app/domain/usecases/auth/registerAddress_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/register_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/shared/get_address_usecase.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/auth_controller.dart';
@@ -41,6 +43,8 @@ Future<void> initInjection() async {
   getIt.registerLazySingleton<IsFirstTimeUseCase>(() => IsFirstTimeUseCase(getIt()));
   getIt.registerLazySingleton<EndFirstTimeUseCase>(() => EndFirstTimeUseCase(getIt()));
   getIt.registerLazySingleton<GetAddressUsecase>(() => GetAddressUsecase(getIt()));
+  getIt.registerLazySingleton<RegisterAdditionalInfoUseCase>(() => RegisterAdditionalInfoUseCase(getIt()));
+  getIt.registerLazySingleton<RegisterAddressUseCase>(() => RegisterAddressUseCase(getIt()));
 
   // Controllers
   getIt.registerLazySingleton<HomeController>(() => HomeController());

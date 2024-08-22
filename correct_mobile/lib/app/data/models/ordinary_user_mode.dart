@@ -26,10 +26,10 @@ class OrdinaryUserModel extends OrdinaryUserEntity {
       required super.selfieBase64,
       required super.documentFrontBase64,
       required super.documentBackBase64,
-      required super.documentSelfieBase64});
+      required super.documentSelfieBase64,
+      required super.password});
 
-
-      factory OrdinaryUserModel.fromJson(Map<String, dynamic> json) => OrdinaryUserModel(
+  factory OrdinaryUserModel.fromJson(Map<String, dynamic> json) => OrdinaryUserModel(
         document: json['document'],
         email: json['email'],
         document2: json['document2'],
@@ -55,6 +55,7 @@ class OrdinaryUserModel extends OrdinaryUserEntity {
         documentFrontBase64: json['document_front_base64'],
         documentBackBase64: json['document_back_base64'],
         documentSelfieBase64: json['document_selfie_base64'],
+        password: '',
       );
 
   Map<String, dynamic> toJson() => {

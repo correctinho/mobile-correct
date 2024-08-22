@@ -14,6 +14,11 @@ extension ExtString on String {
     return passwordRegExp.hasMatch(this);
   }
 
+  bool get isValidPhone {
+    final phoneRegExp = RegExp(r'^\(\d{2}\) \d{4,5}-\d{4}$');
+    return phoneRegExp.hasMatch(this);
+  }
+
   bool get isNotNull {
     // ignore: unnecessary_null_comparison
     return this != null;

@@ -7,6 +7,7 @@ class MainButton extends StatelessWidget {
   final Color textColor;
   final double height;
   final double borderRadius;
+  final double fontSize;
 
   const MainButton({
     Key? key,
@@ -15,6 +16,7 @@ class MainButton extends StatelessWidget {
     required this.height,
     required this.textColor,
     required this.borderRadius,
+    required this.fontSize,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class MainButton extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TextStyle(color: textColor, fontWeight: FontWeight.w500, fontSize: 22),
+          style: TextStyle(color: textColor, fontWeight: FontWeight.w500, fontSize: fontSize),
         ),
       ),
     );

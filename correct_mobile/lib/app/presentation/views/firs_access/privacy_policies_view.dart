@@ -72,6 +72,7 @@ class _PrivacyPoliciesViewState extends State<PrivacyPoliciesView> {
                   height: 50,
                   textColor: CustomColors.whiteBlue,
                   borderRadius: 50,
+                  fontSize: 22,
                 )),
             const SizedBox(
               height: 20,

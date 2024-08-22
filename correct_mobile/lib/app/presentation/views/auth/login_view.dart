@@ -8,7 +8,7 @@ import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/auth_controller.dart';
 import 'package:mobile_create/app/presentation/utils/snack_bar.dart';
 import 'package:mobile_create/app/presentation/views/auth/register_view.dart';
-import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/user_info__firstPart_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/token/token_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
@@ -111,7 +111,7 @@ class _LoginViewState extends State<LoginView> {
                                   if (mounted && authController.isFirst) {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => const DetailsCheckView(),
+                                        builder: (context) => const UserInfoFirstPart(),
                                       ),
                                     );
                                   } else {
@@ -124,7 +124,9 @@ class _LoginViewState extends State<LoginView> {
                                   }
                                 } else {
                                   if (mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(ToastErrorWidget(messageError: authController.response).build(context) as SnackBar);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      ToastErrorWidget(messageError: authController.response).build(context) as SnackBar,
+                                    );
                                   }
                                 }
                               }
@@ -135,10 +137,11 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               textColor: CustomColors.white,
                               borderRadius: 15,
+                              fontSize: 22,
                             ),
                           );
                         } else {
-                          return const CircularProgressIndicator(color: CustomColors.white);
+                          return const CircularProgressIndicator();
                         }
                       }),
                       const SizedBox(height: 20),

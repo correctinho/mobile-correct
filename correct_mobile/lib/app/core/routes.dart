@@ -1,4 +1,4 @@
-import 'package:mobile_create/app/presentation/views/firs_access/user_infor_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/user_info__firstPart_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/login_or_signup_view.dart';
@@ -24,5 +24,5 @@ var routes = {
   '/profile': (_) => const ProfileView(),
   '/show-case-view': (_) => const ShowCaseView(),
   '/food': (_) => const ShowCaseFoodView(),
-  '/user-infor-view': (_) => const UserInforView()
+  '/user-infor-view': (_) => const UserInfoFirstPart(),
 };
