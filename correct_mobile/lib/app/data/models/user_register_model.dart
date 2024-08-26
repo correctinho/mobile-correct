@@ -81,10 +81,10 @@ class AdditionalDocumentsModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'selfieBase64': selfieBase64,
-      'documentFrontBase64': documentFrontBase64,
-      'documentBackBase64': documentBackBase64,
-      'documentSelfieBase64': documentSelfieBase64,
+      'selfie_base64': selfieBase64,
+      'document_front_base64': documentFrontBase64,
+      'document_back_base64': documentBackBase64,
+      'document_selfie_base64': documentSelfieBase64,
     };
   }
 
