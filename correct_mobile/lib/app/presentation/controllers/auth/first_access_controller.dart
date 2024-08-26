@@ -1,8 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
+import 'package:image_compression_flutter/flutter_image_compress.dart';
+import 'package:mobile_create/app/core/base64_converter.dart';
 import 'package:mobile_create/app/data/models/address_model.dart';
+import 'package:mobile_create/app/data/models/user_register_model.dart';
 import 'package:mobile_create/app/domain/entities/adress_entity.dart';
+import 'package:mobile_create/app/domain/usecases/auth/registerAdditionalDocuments_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/registerAddress_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/shared/get_address_usecase.dart';
 import 'package:mobx/mobx.dart';
@@ -13,6 +17,7 @@ class FirstAccessController = _FirstAccessControllerBase with _$FirstAccessContr
 abstract class _FirstAccessControllerBase with Store {
   var getCepUseCase = GetIt.I.get<GetAddressUsecase>();
   var registerAddress = GetIt.I.get<RegisterAddressUseCase>();
+  var registerDocuments = GetIt.I.get<RegisterAdditionalDocumentsUseCase>();
 
   @observable
   bool privacyPolicies = false;
@@ -89,6 +94,48 @@ abstract class _FirstAccessControllerBase with Store {
   Future<void> registerUserAddress() async {
     try {
       response = await registerAddress.registerAddress(addressModel);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @observable
+  AdditionalDocumentsModel additionalDocumentsModel = AdditionalDocumentsModel(
+    selfieBase64: '',
+    documentFrontBase64: '',
+    documentBackBase64: '',
+    documentSelfieBase64: '',
+  );
+
+  @action
+  Future<void> saveImgToModel() async {
+    if (image != null) {
+      final compressedImage = await FlutterImageCompress.compressWithList(
+        image!,
+        quality: 50,
+      );
+      additionalDocumentsModel.selfieBase64 = Base64Converter.encode(compressedImage);
+    }
+    if (front != null) {
+      final compressedfront = await FlutterImageCompress.compressWithList(
+        front!,
+        quality: 50,
+      );
+      additionalDocumentsModel.documentFrontBase64 = Base64Converter.encode(compressedfront);
+    }
+    if (back != null) {
+      final compressedback = await FlutterImageCompress.compressWithList(
+        back!,
+        quality: 50,
+      );
+      additionalDocumentsModel.documentBackBase64 = Base64Converter.encode(compressedback);
+    }
+  }
+
+  @action
+  Future<void> registerAdditionalDocuments() async {
+    try {
+      response = await registerDocuments.registerAdditionalDocuments(additionalDocumentsModel);
     } catch (e) {
       rethrow;
     }

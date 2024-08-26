@@ -25,6 +25,11 @@ class RemoteRepositoyImpl implements RemoteRepository {
   }
 
   @override
+  Future<String> registerAdditionalDocuments(AdditionalDocumentsModel additionalDocumentsModel) async {
+    return await _remoteDataSource.registerAdditionalDocuments(additionalDocumentsModel);
+  }
+
+  @override
   Future<String> registerUserAddress(AddressModel addressModel) async {
     return await _remoteDataSource.registerUserAddress(addressModel);
   }

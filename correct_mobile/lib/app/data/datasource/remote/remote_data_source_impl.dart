@@ -129,6 +129,29 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
+  Future<String> registerAdditionalDocuments(AdditionalDocumentsModel additionalDocumentsModel) async {
+    final prefs = await SharedPreferences.getInstance();
+    final tokenJson = prefs.getString('key');
+    final tokenMap = jsonDecode(tokenJson!);
+    final token = tokenMap['token'];
+    var headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'};
+    var request = http.Request('POST', Uri.parse('https://api-correct-vercel.vercel.app/app-user/document-validation'));
+
+    request.body = additionalDocumentsModel.toJson();
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      print('aaaaaaaaa');
+      return 'sent';
+    } else {
+      log(request.body);
+      return 'not sent';
+    }
+  }
+
+  @override
   Future<bool> logOut() async {
     try {
       const String key = 'key';

@@ -7,6 +7,7 @@ abstract class RemoteDataSource {
   Future<String> registerUserIdentity(UserIdentityInfoModel userIdentityInfoModel);
   Future<String> registerAdditionalInfo(UserAdditionalInfoModel userAdditionalInfoModel);
   Future<String> registerUserAddress(AddressModel addressModel);
+  Future<String> registerAdditionalDocuments(AdditionalDocumentsModel additionalDocumentsModel);
   Future<String> loginUser(String document, String password);
   Future<bool> isAuthenticated();
   Future<bool> logOut();
