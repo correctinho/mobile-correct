@@ -58,9 +58,7 @@ class _SelfieViewState extends State<SelfieView> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    image: DecorationImage(
-                        image: MemoryImage(firstAccessController.image!),
-                        fit: BoxFit.fill),
+                    image: DecorationImage(image: MemoryImage(firstAccessController.image!), fit: BoxFit.fill),
                   ),
                 );
               }
@@ -70,8 +68,7 @@ class _SelfieViewState extends State<SelfieView> {
             ),
             InkWell(
               onTap: () async {
-                firstAccessController.image =
-                    await pickImage(ImageSource.camera);
+                firstAccessController.image = await pickImage(ImageSource.camera);
               },
               child: const BorderButon(
                 text: 'Tirar selfie',
