@@ -59,7 +59,8 @@ class _DocsViewState extends State<DocsView> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Row(
+                  child: PageView(
+                    controller: PageController(viewportFraction: 0.9),
                     children: [
                       Image.memory(firstAccessController.front!),
                       Image.memory(firstAccessController.back!),
