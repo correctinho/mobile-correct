@@ -22,7 +22,7 @@ class UserIdentityInfoModel {
   String toJson() => json.encode(toMap());
 }
 
-class UserAdditionalInfoModel {
+class SetFullUserInforModel {
   String fullname;
   String phone;
   String dateOfBirth;
@@ -34,7 +34,7 @@ class UserAdditionalInfoModel {
   int dependentsQuantity;
   String document2;
   String document3;
-  UserAdditionalInfoModel({
+  SetFullUserInforModel({
     required this.fullname,
     required this.phone,
     required this.dateOfBirth,
@@ -48,6 +48,22 @@ class UserAdditionalInfoModel {
     required this.document3,
   });
 
+  factory SetFullUserInforModel.fromJson(Map<String, dynamic> json) {
+    return SetFullUserInforModel(
+      fullname: json['full_name'] ?? '',
+      phone: json['phone'] ?? '',
+      dateOfBirth: json['date_of_birth'] ?? '',
+      gender: json['gender'] ?? '',
+      salary: json['salary'] ?? 0,
+      function: json['function'] ?? '',
+      recommendationCode: json['recommendation_code'] ?? '',
+      maritalStatus: json['marital_status'] ?? '',
+      dependentsQuantity: json['dependents_quantity'] ?? 0,
+      document2: json['document2'] ?? '',
+      document3: json['document3'] ?? '',
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'full_name': fullname,
@@ -56,11 +72,11 @@ class UserAdditionalInfoModel {
       'gender': gender,
       'salary': salary,
       'function': function,
-      'recommendationCode': recommendationCode,
-      'maritalStatus': maritalStatus,
+      'recommendation_code': recommendationCode,
+      'marital_status': maritalStatus,
       'dependents_quantity': dependentsQuantity,
       'document2': document2,
-      'documente3': document3,
+      'document3': document3,
     };
   }
 

@@ -4,10 +4,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
+import 'package:mobile_create/app/core/dependency_injection.dart';
 import 'package:mobile_create/app/core/regex_extensions.dart';
+import 'package:mobile_create/app/domain/services/locationPermission_service.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/auth_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/outputAppUser_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/userAddress_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/userBenefits_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/user_controller.dart';
 import 'package:mobile_create/app/presentation/utils/snack_bar.dart';
+import 'package:mobile_create/app/presentation/views/auth/recoverPassword_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/register_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/address_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/user_info__firstPart_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/token/token_view.dart';
@@ -24,7 +33,28 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   var authController = GetIt.I.get<AuthController>();
+  var userController = GetIt.I.get<UserController>();
+  var outputAppUserController = GetIt.I.get<OutputAppUserDetailsController>();
+  var userAddressController = GetIt.I.get<GetUserAddressController>();
+  var userBenefitsController = GetIt.I.get<UserBenefitsController>();
+  final LocationPermissionService _permissionService = getIt<LocationPermissionService>();
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _requestLocationPermission(BuildContext context) async {
+    bool hasPermission = await _permissionService.requestLocationPermission();
+
+    if (hasPermission) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const HomeNavigationView(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const ToastErrorWidget(messageError: 'Permissão de localização é necessária para usar o app.').build(context) as SnackBar,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,21 +136,36 @@ class _LoginViewState extends State<LoginView> {
                             onTap: () async {
                               if (_formKey.currentState != null && _formKey.currentState!.validate()) {
                                 await authController.login();
-                                await authController.isFirstTime();
                                 if (authController.response == 'logedin') {
-                                  if (mounted && authController.isFirst) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => const UserInfoFirstPart(),
-                                      ),
-                                    );
+                                  await outputAppUserController.getOutputAppUserDetails();
+
+                                  if (!outputAppUserController.outputAppUserDetailsModel.status) {
+                                    if (!outputAppUserController.outputAppUserDetailsModel.userInfo) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(builder: (context) => const UserInfoFirstPart()),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                      return;
+                                    }
+                                    if (!outputAppUserController.outputAppUserDetailsModel.userAddress) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(builder: (context) => const AddressView()),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                      return;
+                                    }
+                                    if (!outputAppUserController.outputAppUserDetailsModel.userValidation) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(builder: (context) => const DetailsCheckView()),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                      return;
+                                    }
                                   } else {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomeNavigationView(),
-                                      ),
-                                    );
-                                    showSnackBar(context, 'Bem vindo!');
+                                    await userController.getUserDetails();
+                                    await userAddressController.getUserAddress();
+                                    await userBenefitsController.getUserBenefits();
+                                    await _requestLocationPermission(context);
                                   }
                                 } else {
                                   if (mounted) {
@@ -146,6 +191,18 @@ class _LoginViewState extends State<LoginView> {
                       }),
                       const SizedBox(height: 20),
                     ],
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecoverPassWordView()));
+                },
+                child: const Text(
+                  'Esqueceu sua senha?',
+                  style: TextStyle(
+                    color: CustomColors.backGroundColor,
+                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),

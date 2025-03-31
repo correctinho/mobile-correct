@@ -1,3 +1,5 @@
+import 'package:mobile_create/app/presentation/views/firs_access/address_view.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/user_info__firstPart_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_naviagtion_view.dart';
 import 'package:mobile_create/app/presentation/views/home/home_view.dart';
@@ -5,6 +7,7 @@ import 'package:mobile_create/app/presentation/views/auth/login_or_signup_view.d
 import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/register_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/splash_view.dart';
+import 'package:mobile_create/app/presentation/views/profile/editProfile_view.dart';
 import 'package:mobile_create/app/presentation/views/show_case/show_case_food_view.dart';
 import 'package:mobile_create/app/presentation/views/show_case/showcase_view.dart';
 import 'package:mobile_create/app/presentation/views/profile/profile_view.dart';
@@ -25,4 +28,7 @@ var routes = {
   '/show-case-view': (_) => const ShowCaseView(),
   '/food': (_) => const ShowCaseFoodView(),
   '/user-infor-view': (_) => const UserInfoFirstPart(),
+  '/details_check': (_) => const DetailsCheckView(),
+  '/address': (_) => const AddressView(),
+  '/edit_profile': (_) => const EditProfileView(),
 };

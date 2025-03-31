@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/first_access_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/userAddress_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/userBenefits_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/user_controller.dart';
 import 'package:mobile_create/app/presentation/utils/size.dart';
+import 'package:mobile_create/app/presentation/views/auth/widgets/success_register_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/docs_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/selfie_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/welcome_view.dart';
@@ -17,6 +21,9 @@ class DetailsCheckView extends StatefulWidget {
 
 class _DetailsCheckViewState extends State<DetailsCheckView> {
   var firstAccessController = GetIt.I.get<FirstAccessController>();
+  var userAddressController = GetIt.I.get<GetUserAddressController>();
+  var userController = GetIt.I.get<UserController>();
+  var userBenefitsController = GetIt.I.get<UserBenefitsController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,7 +142,20 @@ class _DetailsCheckViewState extends State<DetailsCheckView> {
                       InkWell(
                         onTap: () async {
                           await firstAccessController.registerAdditionalDocuments();
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WelcomeView()));
+                          await userController.getUserDetails();
+                          await userAddressController.getUserAddress();
+                          await userBenefitsController.getUserBenefits();
+                          print(userController.getFullUserInforModel.fullname);
+                          if (firstAccessController.response == 'sent') {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WelcomeView()));
+                          } else {
+                            const RegistrationResponseWidget(
+                              text: 'Fotos não enviadas! Por favor tente novamente',
+                              img: 'assets/png/robot_error.png',
+                              route: '/details_check',
+                              textButton: 'Tente Novamente',
+                            );
+                          }
                         },
                         child: const BorderButon(
                           text: 'Prosseguir',

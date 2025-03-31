@@ -6,7 +6,7 @@ import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/core/regex_extensions.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/register_controller.dart';
 import 'package:mobile_create/app/presentation/views/auth/login_view.dart';
-import 'package:mobile_create/app/presentation/views/auth/success_register_view.dart';
+import 'package:mobile_create/app/presentation/views/auth/widgets/success_register_view.dart';
 import 'package:mobile_create/app/presentation/views/auth/widgets/text_form_field_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
@@ -26,6 +26,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    ValueNotifier<bool> isLoading = ValueNotifier(false);
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -86,7 +87,7 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                           TextFormField(
                             onChanged: (String value) => registerController.userIdentityInfoModel.password = value,
-                            obscureText: false,
+                            obscureText: true,
                             validator: (val) {
                               if (!val!.isValidPassword) return 'Senhas devem conter uma letra maiúscula e 8 caracteres';
                               return null;
@@ -133,6 +134,8 @@ class _RegisterViewState extends State<RegisterView> {
                 InkWell(
                   onTap: () async {
                     try {
+                      isLoading.value = true;
+
                       if (_formKey.currentState!.validate()) {
                         await registerController.register();
                         if (registerController.response == 'created') {
@@ -165,16 +168,24 @@ class _RegisterViewState extends State<RegisterView> {
                           messageError: 'Usuario Ja cadastrado! Efuetuar login',
                         ).build(context) as SnackBar,
                       );
+                    } finally {
+                      isLoading.value = false;
                     }
                   },
-                  child: const MainButton(
-                    text: 'CADASTRAR-SE',
-                    color: CustomColors.backGroundColor,
-                    height: 60,
-                    textColor: CustomColors.white,
-                    borderRadius: 50,
-                    fontSize: 22,
-                  ),
+                  child: ValueListenableBuilder<bool>(
+                      valueListenable: isLoading,
+                      builder: (context, loading, child) {
+                        return loading
+                            ? const CircularProgressIndicator()
+                            : const MainButton(
+                                text: 'CADASTRAR-SE',
+                                color: CustomColors.backGroundColor,
+                                height: 60,
+                                textColor: CustomColors.white,
+                                borderRadius: 50,
+                                fontSize: 22,
+                              );
+                      }),
                 ),
                 const SizedBox(
                   height: 10,

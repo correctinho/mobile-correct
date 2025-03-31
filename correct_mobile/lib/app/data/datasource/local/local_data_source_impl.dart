@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
-import 'package:local_auth_ios/local_auth_ios.dart';
 import 'package:mobile_create/app/data/datasource/local/local_data_source.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,9 +22,6 @@ class LocalDataSourceImpl implements LocalDataSource {
         authMessages: const <AuthMessages>[
           AndroidAuthMessages(
             signInTitle: 'Oops! Biometric authentication required!',
-            cancelButton: 'No thanks',
-          ),
-          IOSAuthMessages(
             cancelButton: 'No thanks',
           ),
         ],

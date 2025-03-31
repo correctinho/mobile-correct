@@ -11,9 +11,10 @@ class CreditCardWidget extends StatelessWidget {
       width: 320,
       decoration: ShapeDecoration(
         image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.fill
-        ),
+            image: NetworkImage(
+              imagePath,
+            ),
+            fit: BoxFit.fill),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(22),
         ),

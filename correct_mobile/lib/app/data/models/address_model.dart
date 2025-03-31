@@ -37,13 +37,11 @@ class AddressModel extends AddressEntity {
   }
 
   factory AddressModel.fromViaCep(Map<String, dynamic> map) {
-    return AddressModel(
-      zipCode: map['cep'],
-      city: map['localidade'],
-      state: map['uf'],
-      street: map['logradouro'],
-      neighborhood: map['bairro'],
-    );
+    return AddressModel(zipCode: map['cep'], city: map['localidade'], state: map['uf'], street: map['logradouro'], neighborhood: map['bairro'], number: map['line2']);
+  }
+
+  factory AddressModel.fromJson(Map<String, dynamic> json) {
+    return AddressModel(zipCode: json['postal_code'], street: json['line1'], neighborhood: json['neighborhood'], city: json['city'], state: json['state'], number: json['line2']);
   }
 
   Map<String, dynamic> toMap() {

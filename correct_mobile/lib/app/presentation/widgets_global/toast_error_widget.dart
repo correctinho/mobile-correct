@@ -31,7 +31,7 @@ class ToastErrorWidget extends StatelessWidget {
           ],
         ),
       ),
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 1700),
       backgroundColor: Colors.red,
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

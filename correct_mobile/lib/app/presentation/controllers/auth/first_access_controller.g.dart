@@ -185,6 +185,24 @@ mixin _$FirstAccessController on _FirstAccessControllerBase, Store {
     });
   }
 
+  late final _$additionalDocumentsModelAtom = Atom(
+      name: '_FirstAccessControllerBase.additionalDocumentsModel',
+      context: context);
+
+  @override
+  AdditionalDocumentsModel get additionalDocumentsModel {
+    _$additionalDocumentsModelAtom.reportRead();
+    return super.additionalDocumentsModel;
+  }
+
+  @override
+  set additionalDocumentsModel(AdditionalDocumentsModel value) {
+    _$additionalDocumentsModelAtom
+        .reportWrite(value, super.additionalDocumentsModel, () {
+      super.additionalDocumentsModel = value;
+    });
+  }
+
   late final _$getCepAsyncAction =
       AsyncAction('_FirstAccessControllerBase.getCep', context: context);
 
@@ -203,6 +221,25 @@ mixin _$FirstAccessController on _FirstAccessControllerBase, Store {
         .run(() => super.registerUserAddress());
   }
 
+  late final _$saveImgToModelAsyncAction = AsyncAction(
+      '_FirstAccessControllerBase.saveImgToModel',
+      context: context);
+
+  @override
+  Future<void> saveImgToModel() {
+    return _$saveImgToModelAsyncAction.run(() => super.saveImgToModel());
+  }
+
+  late final _$registerAdditionalDocumentsAsyncAction = AsyncAction(
+      '_FirstAccessControllerBase.registerAdditionalDocuments',
+      context: context);
+
+  @override
+  Future<void> registerAdditionalDocuments() {
+    return _$registerAdditionalDocumentsAsyncAction
+        .run(() => super.registerAdditionalDocuments());
+  }
+
   @override
   String toString() {
     return '''
@@ -216,7 +253,8 @@ front: ${front},
 back: ${back},
 response: ${response},
 addressEntity: ${addressEntity},
-addressModel: ${addressModel}
+addressModel: ${addressModel},
+additionalDocumentsModel: ${additionalDocumentsModel}
     ''';
   }
 }

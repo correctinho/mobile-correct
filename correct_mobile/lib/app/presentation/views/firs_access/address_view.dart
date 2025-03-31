@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/first_access_controller.dart';
 import 'package:mobile_create/app/presentation/utils/size.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/details_check_view.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/widgets/border_button.dart';
+import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
+import 'package:mobile_create/app/presentation/widgets_global/toast_error_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class AddressView extends StatefulWidget {
@@ -16,6 +20,7 @@ class AddressView extends StatefulWidget {
 
 class _AddressViewState extends State<AddressView> {
   var firstAccessController = GetIt.I.get<FirstAccessController>();
+  bool _idEditing = false;
 
   @override
   void initState() {
@@ -31,7 +36,10 @@ class _AddressViewState extends State<AddressView> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Image.asset('assets/logo_correct_nome.png'),
+        title: const LogoWidget(
+          height: 100,
+          width: 100,
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(12),
@@ -41,18 +49,10 @@ class _AddressViewState extends State<AddressView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: CustomColors.blue,
-                  radius: 21,
-                  child: Center(
-                    child: Text(
-                      '3',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+              const Center(
+                child: Text(
+                  'Endereço',
                 ),
-                title: Text('Endereço'),
               ),
               const SizedBox(
                 height: 15,
@@ -66,22 +66,19 @@ class _AddressViewState extends State<AddressView> {
                   Expanded(
                     flex: 1,
                     child: Material(
-                      borderRadius: BorderRadius.circular(10),
-                      color: CustomColors.grey.withOpacity(0.5),
                       child: TextFormField(
+                        validator: (value) {
+                          if (value == "" || value == null) return "Por favor informe seu CEP";
+                          return null;
+                        },
                         onChanged: (value) {
                           firstAccessController.cep = value;
                         },
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                            )),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                        ),
                       ),
                     ),
                   ),
@@ -107,19 +104,17 @@ class _AddressViewState extends State<AddressView> {
                             style: TextStyle(fontSize: 20),
                           ),
                           Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
+                              validator: (value) {
+                                if (value == "" || value == null) return "Por favor informe sua rua";
+                                return null;
+                              },
                               controller: TextEditingController(text: firstAccessController.street),
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  )),
+                              enabled: false,
+                              decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                              ),
                             ),
                           )
                         ],
@@ -139,8 +134,6 @@ class _AddressViewState extends State<AddressView> {
                           style: TextStyle(fontSize: 20),
                         ),
                         Material(
-                          borderRadius: BorderRadius.circular(10),
-                          color: CustomColors.grey.withOpacity(0.5),
                           child: Observer(builder: (_) {
                             return TextFormField(
                               onChanged: (value) {
@@ -149,14 +142,9 @@ class _AddressViewState extends State<AddressView> {
                               },
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  )),
+                              decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                              ),
                             );
                           }),
                         ),
@@ -178,19 +166,17 @@ class _AddressViewState extends State<AddressView> {
                             style: TextStyle(fontSize: 20),
                           ),
                           Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
+                              validator: (value) {
+                                if (value == "" || value == null) return "Por favor informe seu";
+                                return null;
+                              },
                               controller: TextEditingController(text: firstAccessController.neighborhood),
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  )),
+                              enabled: false,
+                              decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                              ),
                             ),
                           )
                         ],
@@ -210,19 +196,13 @@ class _AddressViewState extends State<AddressView> {
                             style: TextStyle(fontSize: 20),
                           ),
                           Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: CustomColors.grey.withOpacity(0.5),
                             child: Observer(builder: (_) {
                               return TextFormField(
                                 enabled: false,
                                 controller: TextEditingController(text: firstAccessController.state),
                                 textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                decoration: const InputDecoration(
+                                  hintStyle: TextStyle(color: CustomColors.backGroundColor),
                                 ),
                               );
                             }),
@@ -244,18 +224,12 @@ class _AddressViewState extends State<AddressView> {
                             style: TextStyle(fontSize: 20),
                           ),
                           Material(
-                            borderRadius: BorderRadius.circular(10),
-                            color: CustomColors.grey.withOpacity(0.5),
                             child: TextFormField(
                               enabled: false,
                               controller: TextEditingController(text: firstAccessController.addressEntity.country),
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: CustomColors.grey.withOpacity(0.5)),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                              decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: CustomColors.backGroundColor),
                               ),
                             ),
                           )
@@ -276,7 +250,14 @@ class _AddressViewState extends State<AddressView> {
                 alignment: Alignment.center,
                 child: InkWell(
                   onTap: () async {
-                    firstAccessController.registerUserAddress();
+                    await firstAccessController.registerUserAddress();
+                    if (firstAccessController.response == 'created') {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsCheckView()));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const ToastErrorWidget(messageError: "Erro ao cadastrar endereço! Tente Novamente").build(context) as SnackBar,
+                      );
+                    }
                   },
                   child: const BorderButon(
                     text: 'Salvar',

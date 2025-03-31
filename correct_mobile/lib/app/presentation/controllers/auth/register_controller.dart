@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/data/models/address_model.dart';
-import 'package:mobile_create/app/data/models/user_register_model.dart';
+import 'package:mobile_create/app/data/models/user_identity_info_model.dart';
 import 'package:mobile_create/app/domain/usecases/auth/registerAdditionalInfo_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/registerAddress_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/register_usecase.dart';
@@ -50,7 +50,7 @@ abstract class _RegisterControllerBase with Store {
   }
 
   @observable
-  UserAdditionalInfoModel userAdditionalInfoModel = UserAdditionalInfoModel(
+  SetFullUserInforModel userAdditionalInfoModel = SetFullUserInforModel(
     fullname: '',
     phone: '',
     dateOfBirth: '',

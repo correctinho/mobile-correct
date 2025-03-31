@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_compression_flutter/flutter_image_compress.dart';
 import 'package:mobile_create/app/core/base64_converter.dart';
 import 'package:mobile_create/app/data/models/address_model.dart';
-import 'package:mobile_create/app/data/models/user_register_model.dart';
+import 'package:mobile_create/app/data/models/user_identity_info_model.dart';
 import 'package:mobile_create/app/domain/entities/adress_entity.dart';
 import 'package:mobile_create/app/domain/usecases/auth/registerAdditionalDocuments_usecase.dart';
 import 'package:mobile_create/app/domain/usecases/auth/registerAddress_usecase.dart';
