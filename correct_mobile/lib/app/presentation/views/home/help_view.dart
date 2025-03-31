@@ -28,7 +28,7 @@ class _HelpViewState extends State<HelpView> {
         padding: const EdgeInsets.all(12),
         height: getSize(context).height,
         width: getSize(context).width,
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           child: Column(
             children: [
               Row(
@@ -39,24 +39,27 @@ class _HelpViewState extends State<HelpView> {
                     ),
                     color: CustomColors.blue,
                   ),
-                  Text('  Ajuda',style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                  Text(
+                    '  Ajuda',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
-              const SizedBox(
-                height: 15
-              ),
+              const SizedBox(height: 15),
               Text(
-                  'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ', style: TextStyle(fontSize: 20),),
-              const SizedBox(
-                height: 15
+                'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ',
+                style: TextStyle(fontSize: 20),
               ),
+              const SizedBox(height: 15),
               Text(
-                  'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ', style: TextStyle(fontSize: 20),),
-              const SizedBox(
-                height: 15
+                'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ',
+                style: TextStyle(fontSize: 20),
               ),
+              const SizedBox(height: 15),
               Text(
-                  'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ', style: TextStyle(fontSize: 20),),
+                'Porem ipsum dolor sit amet? \n\nKonsectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class ',
+                style: TextStyle(fontSize: 20),
+              ),
             ],
           ),
         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
-import 'package:mobile_create/app/core/credit_card_list_mock.dart';
+import 'package:mobile_create/app/presentation/controllers/user/userBenefits_controller.dart';
 import 'package:mobile_create/app/presentation/views/wallets/wallets_view.dart';
 
 class WalletsListView extends StatefulWidget {
@@ -12,6 +13,7 @@ class WalletsListView extends StatefulWidget {
 }
 
 class _WalletsListViewState extends State<WalletsListView> {
+  var userBenefitsController = GetIt.I.get<UserBenefitsController>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -57,23 +59,39 @@ class _WalletsListViewState extends State<WalletsListView> {
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),
-                  itemCount: 5,
+                  itemCount: userBenefitsController.userBenefitsList.length,
                   itemBuilder: (context, index) {
+                    final benefits = userBenefitsController.userBenefitsList[index];
                     return InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
                             builder: (context) => WalletsView(
-                                cardName: creditCardList[index],
-                                imagePath: 'assets/wallets/${index + 1}.png')));
+                              cardName: benefits.benefitsName,
+                              imagePath: benefits.imgBenefits,
+                              balance: benefits.balence,
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(12),
+                        margin: const EdgeInsets.only(top: 10),
                         width: size.width,
                         height: 100,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/wallets_list/${index + 1}.png'))),
+                              image: NetworkImage(
+                                benefits.imgBenefits,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: Text(
+                            benefits.benefitsName,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
                       ),
                     );
                   },

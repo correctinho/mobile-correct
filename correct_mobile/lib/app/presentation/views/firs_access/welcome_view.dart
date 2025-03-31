@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
+import 'package:mobile_create/app/presentation/controllers/user/user_controller.dart';
 import 'package:mobile_create/app/presentation/utils/size.dart';
 import 'package:mobile_create/app/presentation/views/firs_access/privacy_policies_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
@@ -15,6 +17,9 @@ class WelcomeView extends StatefulWidget {
 class _WelcomeViewState extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
+    var userController = GetIt.I.get<UserController>();
+    var firstName = userController.getFullUserInforModel.fullname.split(' ')[0];
+
     return Scaffold(
         body: Center(
       child: Stack(
@@ -24,9 +29,10 @@ class _WelcomeViewState extends State<WelcomeView> {
             width: getSize(context).width,
             decoration: const BoxDecoration(
               gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: <Color>[
-                Color(0xFF002B43),
-                Color(0xFF002F48),
                 Color(0xFF021E2D),
+                Color(0xFF024C74),
+                Color(0xFF0C80BF),
+                Color(0xFF175C82),
               ]),
             ),
           ),
@@ -35,13 +41,13 @@ class _WelcomeViewState extends State<WelcomeView> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 1,
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Bem-vindo, “Francisco”.',
-                        style: TextStyle(color: CustomColors.ligthGrey, fontSize: 24),
+                        'Bem-vindo, $firstName',
+                        style: const TextStyle(color: CustomColors.ligthGrey, fontSize: 24),
                       )),
                 ),
                 const Expanded(

@@ -95,13 +95,13 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
       context: context);
 
   @override
-  UserAdditionalInfoModel get userAdditionalInfoModel {
+  SetFullUserInforModel get userAdditionalInfoModel {
     _$userAdditionalInfoModelAtom.reportRead();
     return super.userAdditionalInfoModel;
   }
 
   @override
-  set userAdditionalInfoModel(UserAdditionalInfoModel value) {
+  set userAdditionalInfoModel(SetFullUserInforModel value) {
     _$userAdditionalInfoModelAtom
         .reportWrite(value, super.userAdditionalInfoModel, () {
       super.userAdditionalInfoModel = value;

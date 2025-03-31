@@ -48,8 +48,7 @@ class _DocsViewState extends State<DocsView> {
               height: 15,
             ),
             Observer(builder: (_) {
-              if (firstAccessController.front == null ||
-                  firstAccessController.back == null) {
+              if (firstAccessController.front == null || firstAccessController.back == null) {
                 return Image.asset('assets/first_access/selfie.png');
               } else {
                 return Container(
@@ -59,11 +58,9 @@ class _DocsViewState extends State<DocsView> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    image: DecorationImage(
-                        image: MemoryImage(firstAccessController.image!),
-                        fit: BoxFit.fill),
                   ),
-                  child: Row(
+                  child: PageView(
+                    controller: PageController(viewportFraction: 0.9),
                     children: [
                       Image.memory(firstAccessController.front!),
                       Image.memory(firstAccessController.back!),
@@ -80,8 +77,8 @@ class _DocsViewState extends State<DocsView> {
               children: [
                 InkWell(
                   onTap: () async {
-                    firstAccessController.front =
-                        await pickImage(ImageSource.camera);
+                    firstAccessController.front = await pickImage(ImageSource.camera);
+                    await firstAccessController.saveImgToModel();
                   },
                   child: const BorderButon(
                     text: 'Frente',
@@ -90,8 +87,8 @@ class _DocsViewState extends State<DocsView> {
                 ),
                 InkWell(
                   onTap: () async {
-                    firstAccessController.back =
-                        await pickImage(ImageSource.camera);
+                    firstAccessController.back = await pickImage(ImageSource.camera);
+                    await firstAccessController.saveImgToModel();
                   },
                   child: const BorderButon(
                     text: 'Verso',

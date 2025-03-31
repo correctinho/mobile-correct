@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_create/app/core/colors/colors.dart';
 import 'package:mobile_create/app/presentation/controllers/auth/register_controller.dart';
+import 'package:mobile_create/app/presentation/controllers/user/user_controller.dart';
+import 'package:mobile_create/app/presentation/views/firs_access/address_view.dart';
 import 'package:mobile_create/app/presentation/widgets_global/logo_widget.dart';
 import 'package:mobile_create/app/presentation/widgets_global/main_button_widget.dart';
 
@@ -16,6 +19,9 @@ class UserInfoSecondPartView extends StatefulWidget {
 
 class _UserInfoSecondPartViewState extends State<UserInfoSecondPartView> {
   var registerController = GetIt.I.get<RegisterController>();
+  var userController = GetIt.I.get<UserController>();
+  final List<String> genderOptions = ['Masculino', 'Feminino', 'Outro'];
+  String? selectedGender;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -49,53 +55,37 @@ class _UserInfoSecondPartViewState extends State<UserInfoSecondPartView> {
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: SizedBox(
-                  height: size.height * 0.5,
+                  height: size.height * 0.3,
                   child: Form(
                     key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        TextFormField(
-                          onChanged: (String value) => registerController.userAdditionalInfoModel.gender = value,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.wc,
-                              color: CustomColors.backGroundColor,
-                            ),
-                            labelText: 'Gênero',
-                            labelStyle: TextStyle(color: CustomColors.backGroundColor),
-                          ),
-                        ),
-                        TextFormField(
-                          onChanged: (value) {
-                            int? parsedValue = int.tryParse(value);
-                            if (parsedValue != null) {
-                              registerController.userAdditionalInfoModel.dependentsQuantity = parsedValue;
-                            }
+                        DropdownButtonFormField<String>(
+                          value: selectedGender,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedGender = newValue;
+                            });
                           },
-                          keyboardType: TextInputType.number,
+                          items: [
+                            DropdownMenuItem<String>(
+                              value: genderOptions[0],
+                              child: Text(genderOptions[0]),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: genderOptions[1],
+                              child: Text(genderOptions[1]),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: genderOptions[2],
+                              child: Text(genderOptions[2]),
+                            ),
+                          ],
                           decoration: const InputDecoration(
-                            labelText: 'Salario',
-                            labelStyle: TextStyle(color: CustomColors.backGroundColor),
-                            prefixIcon: Icon(
-                              Icons.payments_outlined,
-                              color: CustomColors.backGroundColor,
-                            ),
-                            prefix: Text(
-                              'R\$:',
-                              style: TextStyle(color: CustomColors.backGroundColor),
-                            ),
-                          ),
-                        ),
-                        TextFormField(
-                          onChanged: (String value) => registerController.userAdditionalInfoModel.function = value,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.work_outline_outlined,
-                              color: CustomColors.backGroundColor,
-                            ),
-                            labelText: 'Cargo empresarial',
-                            labelStyle: TextStyle(color: CustomColors.backGroundColor),
+                            hintText: 'Gênero *',
+                            hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                            prefixIcon: const Icon(Icons.wc),
                           ),
                         ),
                         TextFormField(
@@ -120,27 +110,7 @@ class _UserInfoSecondPartViewState extends State<UserInfoSecondPartView> {
                               Icons.description_outlined,
                               color: CustomColors.backGroundColor,
                             ),
-                            labelText: 'Estado civil',
-                            labelStyle: TextStyle(color: CustomColors.backGroundColor),
-                          ),
-                        ),
-                        TextFormField(
-                          onChanged: (String value) {
-                            int? parsedValue = int.tryParse(value);
-                            if (parsedValue != null) {
-                              registerController.userAdditionalInfoModel.dependentsQuantity = parsedValue;
-                            }
-                          },
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.escalator_warning_outlined,
-                              color: CustomColors.backGroundColor,
-                            ),
-                            labelText: 'Quantidades de dependentes',
+                            labelText: 'Estado civil *',
                             labelStyle: TextStyle(color: CustomColors.backGroundColor),
                           ),
                         ),
@@ -156,7 +126,7 @@ class _UserInfoSecondPartViewState extends State<UserInfoSecondPartView> {
                     onTap: () async {
                       await registerController.registerAdditionalInfo();
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserInfoSecondPartView()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddressView()));
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(registerController.response)),

@@ -15,7 +15,7 @@ abstract class _AuthControllerBase with Store {
   var endFirstTimeUseCase = GetIt.instance.get<EndFirstTimeUseCase>();
 
   @observable
-  bool isFirst = false;
+  bool isFirst = true;
 
   @observable
   String cpf = '';

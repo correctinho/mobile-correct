@@ -51,12 +51,34 @@ class _UserInfoFirstPartState extends State<UserInfoFirstPart> {
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: SizedBox(
-                  height: size.height * 0.3,
+                  height: size.height * 0.5,
                   child: Form(
                     key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        TextFormField(
+                          onChanged: (String value) => registerController.userAdditionalInfoModel.document2 = value,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.badge,
+                              color: CustomColors.backGroundColor,
+                            ),
+                            hintText: "RG",
+                            hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                          ),
+                        ),
+                        TextFormField(
+                          onChanged: (String value) => registerController.userAdditionalInfoModel.document3 = value,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.drive_eta,
+                              color: CustomColors.backGroundColor,
+                            ),
+                            hintText: "CNH",
+                            hintStyle: TextStyle(color: CustomColors.backGroundColor),
+                          ),
+                        ),
                         TextFormField(
                           onChanged: (String value) => registerController.userAdditionalInfoModel.fullname = value,
                           validator: (value) {
@@ -75,7 +97,7 @@ class _UserInfoFirstPartState extends State<UserInfoFirstPart> {
                         TextFormField(
                           onChanged: (String value) => registerController.userAdditionalInfoModel.phone = value,
                           validator: (value) {
-                            //  if (!value!.isValidPhone) return "Numero de telefone invalido";
+                            if (value == "" || value == null) return "Por favor informe seu numero de telefone";
                             return null;
                           },
                           keyboardType: TextInputType.number,
@@ -84,7 +106,7 @@ class _UserInfoFirstPartState extends State<UserInfoFirstPart> {
                               Icons.phone,
                               color: CustomColors.backGroundColor,
                             ),
-                            hintText: "Telefone",
+                            hintText: "(DDD) xxxxxxx *",
                             hintStyle: TextStyle(color: CustomColors.backGroundColor),
                           ),
                         ),
@@ -104,7 +126,7 @@ class _UserInfoFirstPartState extends State<UserInfoFirstPart> {
                               Icons.cake,
                               color: CustomColors.backGroundColor,
                             ),
-                            hintText: "Data de aniversario *",
+                            hintText: "DD/MM/AAAA *",
                             hintStyle: TextStyle(color: CustomColors.backGroundColor),
                           ),
                         ),
